@@ -1,6 +1,5 @@
 package com.dvidal.samplecurrencies.utils
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
 import kotlinx.coroutines.flow.Flow

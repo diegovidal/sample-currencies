@@ -50,7 +50,17 @@ class RatesDaoTest {
     }
 
     @Test
-    fun `when add rate should return rate as live data`() = runBlocking {
+    fun `when add 2 rates with same symbol should return only 1 rate`() = runBlocking {
+
+        val dummyRates = listOf(RateDto(symbol = "brl"), RateDto(symbol = "brl"))
+
+        appDatabase.ratesDao().insertRates(dummyRates)
+        val ratesDto = appDatabase.ratesDao().fetchRates()
+        assertEquals(1, ratesDto.getOrAwaitValue().size)
+    }
+
+    @Test
+    fun `when add rate and clear should return empty list`() = runBlocking {
 
         val dummyRates = listOf(RateDto(symbol = "brl"), RateDto(symbol = "eur"))
 
