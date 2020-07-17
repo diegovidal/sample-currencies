@@ -1,10 +1,13 @@
 package com.dvidal.samplecurrencies.features.currencies.data.remote
 
+import com.dvidal.samplecurrencies.core.datasource.remote.NetworkConstants
+import com.dvidal.samplecurrencies.core.datasource.remote.NetworkConstants.BASE_CURRENCY
+import com.dvidal.samplecurrencies.core.datasource.remote.NetworkConstants.RATES
 import com.squareup.moshi.Json
 
 data class RatesRemoteResponse(
-    @Json(name = "baseCurrency") val baseCurrency: String?,
-    @Json(name = "rates") val rates: RatesRemote?
+    @Json(name = BASE_CURRENCY) val baseCurrency: String?,
+    @Json(name = RATES) val rates: RatesRemote?
 ) {
 
     companion object {
@@ -14,35 +17,35 @@ data class RatesRemoteResponse(
 }
 
 data class RatesRemote(
-    @Json(name = "AUD") val AUD: Double,
-    @Json(name = "BGN") val BGN: Double,
-    @Json(name = "BRL") val BRL: Double,
-    @Json(name = "CAD") val CAD: Double,
-    @Json(name = "CHF") val CHF: Double,
-    @Json(name = "CNY") val CNY: Double,
-    @Json(name = "CZK") val CZK: Double,
-    @Json(name = "DKK") val DKK: Double,
-    @Json(name = "GBP") val GBP: Double,
-    @Json(name = "HKD") val HKD: Double,
-    @Json(name = "HRK") val HRK: Double,
-    @Json(name = "HUF") val HUF: Double,
-    @Json(name = "IDR") val IDR: Double,
-    @Json(name = "ILS") val ILS: Double,
-    @Json(name = "INR") val INR: Double,
-    @Json(name = "ISK") val ISK: Double,
-    @Json(name = "JPY") val JPY: Double,
-    @Json(name = "KRW") val KRW: Double,
-    @Json(name = "MXN") val MXN: Double,
-    @Json(name = "MYR") val MYR: Double,
-    @Json(name = "NOK") val NOK: Double,
-    @Json(name = "NZD") val NZD: Double,
-    @Json(name = "PHP") val PHP: Double,
-    @Json(name = "PLN") val PLN: Double,
-    @Json(name = "RON") val RON: Double,
-    @Json(name = "RUB") val RUB: Double,
-    @Json(name = "SEK") val SEK: Double,
-    @Json(name = "SGD") val SGD: Double,
-    @Json(name = "THB") val THB: Double,
-    @Json(name = "USD") val USD: Double,
-    @Json(name = "ZAR") val ZAR: Double
+    @Json(name = NetworkConstants.AUD) val aud: Double,
+    @Json(name = NetworkConstants.BGN) val bgn: Double,
+    @Json(name = NetworkConstants.BRL) val brl: Double,
+    @Json(name = NetworkConstants.CAD) val cad: Double,
+    @Json(name = NetworkConstants.CHF) val chf: Double,
+    @Json(name = NetworkConstants.CNY) val cny: Double,
+    @Json(name = NetworkConstants.CZK) val czk: Double,
+    @Json(name = NetworkConstants.DKK) val dkk: Double,
+    @Json(name = NetworkConstants.GBP) val gbp: Double,
+    @Json(name = NetworkConstants.HKD) val hkd: Double,
+    @Json(name = NetworkConstants.HRK) val hrk: Double,
+    @Json(name = NetworkConstants.HUF) val huf: Double,
+    @Json(name = NetworkConstants.IDR) val idr: Double,
+    @Json(name = NetworkConstants.ILS) val ils: Double,
+    @Json(name = NetworkConstants.INR) val inr: Double,
+    @Json(name = NetworkConstants.ISK) val isk: Double,
+    @Json(name = NetworkConstants.JPY) val jpy: Double,
+    @Json(name = NetworkConstants.KRW) val krw: Double,
+    @Json(name = NetworkConstants.MXN) val mxn: Double,
+    @Json(name = NetworkConstants.MYR) val myr: Double,
+    @Json(name = NetworkConstants.NOK) val nok: Double,
+    @Json(name = NetworkConstants.NZD) val nzd: Double,
+    @Json(name = NetworkConstants.PHP) val php: Double,
+    @Json(name = NetworkConstants.PLN) val pln: Double,
+    @Json(name = NetworkConstants.RON) val ron: Double,
+    @Json(name = NetworkConstants.RUB) val rub: Double,
+    @Json(name = NetworkConstants.SEK) val sek: Double,
+    @Json(name = NetworkConstants.SGD) val sgd: Double,
+    @Json(name = NetworkConstants.THB) val thb: Double,
+    @Json(name = NetworkConstants.USD) val usd: Double,
+    @Json(name = NetworkConstants.ZAR) val zar: Double
 )
