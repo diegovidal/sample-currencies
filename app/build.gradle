@@ -51,14 +51,17 @@ dependencies {
     // Android Dependencies
     implementation applicationDependencies.appCompat
     implementation applicationDependencies.materialDesign
-    implementation applicationDependencies.swipeRefreshLayout
     implementation applicationDependencies.core
     implementation applicationDependencies.constraintLayout
     implementation applicationDependencies.recyclerView
+    implementation applicationDependencies.coroutinesAndroid
+    implementation applicationDependencies.coroutinesCore
     implementation applicationDependencies.room
     implementation applicationDependencies.roomKtx
     implementation applicationDependencies.lifeCycleExtensions
     implementation applicationDependencies.lifeCycleViewModelKtx
+    implementation applicationDependencies.lifeCycleLiveData
+    implementation applicationDependencies.lifeCycleRuntime
 
     // Third Party Libraries
     implementation applicationDependencies.retrofit
@@ -77,6 +80,7 @@ dependencies {
     testImplementation unitTestDependencies.junit
     testImplementation unitTestDependencies.mockk
     testImplementation unitTestDependencies.archCore
+    testImplementation unitTestDependencies.lifeCycleLiveData
     testImplementation unitTestDependencies.robolectric
 
     // Integration Testing
