@@ -1,7 +1,8 @@
-package com.dvidal.samplecurrencies
+package com.dvidal.samplecurrencies.features
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.dvidal.samplecurrencies.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
