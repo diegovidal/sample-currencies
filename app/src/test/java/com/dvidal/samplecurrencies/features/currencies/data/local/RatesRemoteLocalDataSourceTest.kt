@@ -1,6 +1,6 @@
 package com.dvidal.samplecurrencies.features.currencies.data.local
 
-import com.dvidal.samplecurrencies.datasource.local.AppDatabase
+import com.dvidal.samplecurrencies.core.datasource.local.AppDatabase
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -8,13 +8,12 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
-import org.junit.Assert.*
 import org.junit.Before
 
 /**
  * @author diegovidal on 17/07/20.
  */
-class RatesLocalDataSourceTest {
+class RatesRemoteLocalDataSourceTest {
 
     private val appDatabase = mockk<AppDatabase>()
     lateinit var dataSource: RatesLocalDataSource

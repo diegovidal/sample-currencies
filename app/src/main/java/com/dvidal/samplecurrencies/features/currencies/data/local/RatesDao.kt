@@ -16,7 +16,7 @@ interface RatesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRates(ratesDto: List<RateDto>)
 
-    @Query("SELECT * FROM ratedto")
+    @Query("SELECT * FROM rateDto")
     fun fetchRates(): Flow<List<RateDto?>>
 
     @Query("DELETE FROM rateDto")

@@ -2,7 +2,7 @@ package com.dvidal.samplecurrencies.features.currencies.data.local
 
 import com.dvidal.samplecurrencies.core.common.EitherResult
 import com.dvidal.samplecurrencies.core.common.catching
-import com.dvidal.samplecurrencies.datasource.local.AppDatabase
+import com.dvidal.samplecurrencies.core.datasource.local.AppDatabase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

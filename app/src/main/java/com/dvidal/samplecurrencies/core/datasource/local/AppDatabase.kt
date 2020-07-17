@@ -1,4 +1,4 @@
-package com.dvidal.samplecurrencies.datasource.local
+package com.dvidal.samplecurrencies.core.datasource.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
