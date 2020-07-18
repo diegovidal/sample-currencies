@@ -2,6 +2,7 @@ package com.dvidal.samplecurrencies.features.currencies.data.remote
 
 import com.dvidal.samplecurrencies.core.common.BaseRequester
 import com.dvidal.samplecurrencies.core.common.EitherResult
+import com.dvidal.samplecurrencies.core.datasource.remote.NetworkConstants
 import com.dvidal.samplecurrencies.core.datasource.remote.NetworkHandler
 import com.dvidal.samplecurrencies.core.datasource.remote.RemoteApi
 import javax.inject.Inject
@@ -15,9 +16,9 @@ class RatesRemoteDataSourceImpl @Inject constructor(
     networkHandler: NetworkHandler
 ) : BaseRequester(networkHandler), RatesRemoteDataSource {
 
-    override suspend fun fetchRates(symbol: String): EitherResult<RatesRemoteResponse> {
+    override suspend fun fetchRates(): EitherResult<RatesRemoteResponse> {
         return request(
-            apiCall = { remoteApi.fetchRates(symbol) },
+            apiCall = { remoteApi.fetchRates( NetworkConstants.EUR) },
             transform = { it },
             default = RatesRemoteResponse.empty()
         )

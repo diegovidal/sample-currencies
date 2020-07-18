@@ -35,7 +35,7 @@ class RatesRemoteDataSourceTest {
         val expectedRemoteResponse = RatesRemoteResponse.empty()
         coEvery { remoteApi.fetchRates(symbol) } returns expectedRemoteResponse
 
-        val remoteResponse = remoteDataSource.fetchRates(symbol).rightOrNull()
+        val remoteResponse = remoteDataSource.fetchRates().rightOrNull()
         coVerify(exactly = 1) {remoteApi.fetchRates(symbol)}
         assertEquals(expectedRemoteResponse, remoteResponse)
     }

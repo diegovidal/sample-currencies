@@ -4,6 +4,7 @@ import com.dvidal.samplecurrencies.core.common.EitherResult
 import com.dvidal.samplecurrencies.core.common.catching
 import com.dvidal.samplecurrencies.core.datasource.local.AppDatabase
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 /**
@@ -18,7 +19,7 @@ class RatesLocalDataSourceImpl @Inject constructor(
     }
 
     override fun fetchAllRates(): EitherResult<Flow<List<RateDto?>>> {
-        return catching { appDatabase.ratesDao().fetchRates() }
+        return catching { appDatabase.ratesDao().fetchRates().map { emptyList<RateDto>() } }
     }
 
     override suspend fun clearAllRates(): EitherResult<Unit> {

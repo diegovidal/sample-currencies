@@ -7,5 +7,5 @@ import com.dvidal.samplecurrencies.core.common.EitherResult
  */
 interface RatesRemoteDataSource {
 
-    suspend fun fetchRates(symbol: String): EitherResult<RatesRemoteResponse>
+    suspend fun fetchRates(): EitherResult<RatesRemoteResponse>
 }

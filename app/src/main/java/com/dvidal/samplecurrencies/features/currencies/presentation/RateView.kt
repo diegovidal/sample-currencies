@@ -5,15 +5,15 @@ import androidx.room.PrimaryKey
 /**
  * @author diegovidal on 17/07/20.
  */
-data class RatePresentationResponse(
+data class RatesPresentationResponse(
     val baseCurrency: String,
     val rates: List<RatePresentation>
 )
 
 data class RatePresentation(
-    val symbol: String = "",
-    val rateName: Int = -1,
-    val value: Float = -1f,
-    val image: Int = -1,
+    val symbol: String,
+    val rateName: Int? = null,
+    val value: Float? = null,
+    val image: Int? = null,
     val isDefault: Boolean = false
 )

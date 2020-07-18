@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey
 data class RateDto(
     @PrimaryKey val symbol: String = "",
     val name: Int = -1,
-    val value: Float = -1f,
+    var value: Double? = -1.0,
     val image: Int = -1,
     val isDefault: Boolean = false
 )

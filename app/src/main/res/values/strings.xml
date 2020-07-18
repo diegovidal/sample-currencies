@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">SampleCurrencies</string>
+
+    <string name="symbol_usd">US Dollar</string>
+    <string name="symbol_brl">Brazilian Real</string>
+    <string name="symbol_eur">Euro</string>
+    <string name="symbol_jpy">Japanese Yen</string>
+    <string name="symbol_dkk">Danish Krone</string>
 </resources>

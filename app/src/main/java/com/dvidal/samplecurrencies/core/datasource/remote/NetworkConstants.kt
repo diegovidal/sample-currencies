@@ -10,6 +10,7 @@ object NetworkConstants {
     const val RATES = "rates"
 
     const val AUD = "AUD"
+    const val EUR = "EUR"
     const val BGN = "BGN"
     const val BRL = "BRL"
     const val CAD = "CAD"
