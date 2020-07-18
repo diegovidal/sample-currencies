@@ -1,6 +1,9 @@
 package com.dvidal.samplecurrencies.features.currencies.data.local
 
 import com.dvidal.samplecurrencies.core.datasource.local.AppDatabase
+import com.dvidal.samplecurrencies.features.currencies.data.local.rates.RateDto
+import com.dvidal.samplecurrencies.features.currencies.data.local.rates.RatesLocalDataSource
+import com.dvidal.samplecurrencies.features.currencies.data.local.rates.RatesLocalDataSourceImpl
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -20,13 +23,23 @@ class RatesRemoteLocalDataSourceTest {
 
     @Before
     fun setup() {
-        dataSource = RatesLocalDataSourceImpl(appDatabase)
+        dataSource =
+            RatesLocalDataSourceImpl(
+                appDatabase
+            )
     }
 
     @Test
     fun `when insert rates should call ratesDao insert rates`() = runBlocking {
 
-        val dummyRates = listOf(RateDto(symbol = "brl"), RateDto(symbol = "eur"))
+        val dummyRates = listOf(
+            RateDto(
+                symbol = "brl"
+            ),
+            RateDto(
+                symbol = "eur"
+            )
+        )
         coEvery { appDatabase.ratesDao().insertRates(dummyRates) } returns Unit
         dataSource.insertAllRates(dummyRates)
 
@@ -36,7 +49,14 @@ class RatesRemoteLocalDataSourceTest {
     @Test
     fun `when fetch all rates should call ratesDao fetch rates`() = runBlocking {
 
-        val dummyRates = listOf(RateDto(symbol = "brl"), RateDto(symbol = "eur"))
+        val dummyRates = listOf(
+            RateDto(
+                symbol = "brl"
+            ),
+            RateDto(
+                symbol = "eur"
+            )
+        )
         val dummyFlow = flow { emit(dummyRates) }
         coEvery { appDatabase.ratesDao().fetchRates() } returns dummyFlow
 

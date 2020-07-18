@@ -1,4 +1,4 @@
-package com.dvidal.samplecurrencies.features.currencies.data.local
+package com.dvidal.samplecurrencies.features.currencies.data.local.rates
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

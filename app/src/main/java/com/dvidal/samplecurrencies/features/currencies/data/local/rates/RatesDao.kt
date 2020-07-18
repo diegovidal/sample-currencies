@@ -1,9 +1,10 @@
-package com.dvidal.samplecurrencies.features.currencies.data.local
+package com.dvidal.samplecurrencies.features.currencies.data.local.rates
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.dvidal.samplecurrencies.features.currencies.data.local.rates.RateDto
 import kotlinx.coroutines.flow.Flow
 
 /**

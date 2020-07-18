@@ -1,8 +1,8 @@
 package com.dvidal.samplecurrencies.features.currencies.domain
 
 import com.dvidal.samplecurrencies.core.common.EitherResult
-import com.dvidal.samplecurrencies.features.currencies.data.local.RateDto
-import com.dvidal.samplecurrencies.features.currencies.data.local.RatesLocalDataSource
+import com.dvidal.samplecurrencies.features.currencies.data.local.rates.RateDto
+import com.dvidal.samplecurrencies.features.currencies.data.local.rates.RatesLocalDataSource
 import com.dvidal.samplecurrencies.features.currencies.data.remote.RatesRemoteDataSource
 import com.dvidal.samplecurrencies.features.currencies.presentation.RatePresentation
 import kotlinx.coroutines.flow.Flow

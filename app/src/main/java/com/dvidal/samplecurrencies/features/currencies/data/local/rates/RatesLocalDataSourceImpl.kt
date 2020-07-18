@@ -1,8 +1,10 @@
-package com.dvidal.samplecurrencies.features.currencies.data.local
+package com.dvidal.samplecurrencies.features.currencies.data.local.rates
 
 import com.dvidal.samplecurrencies.core.common.EitherResult
 import com.dvidal.samplecurrencies.core.common.catching
 import com.dvidal.samplecurrencies.core.datasource.local.AppDatabase
+import com.dvidal.samplecurrencies.features.currencies.data.local.rates.RateDto
+import com.dvidal.samplecurrencies.features.currencies.data.local.rates.RatesLocalDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

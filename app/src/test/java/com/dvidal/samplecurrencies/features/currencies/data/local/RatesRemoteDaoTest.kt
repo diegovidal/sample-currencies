@@ -3,6 +3,7 @@ package com.dvidal.samplecurrencies.features.currencies.data.local
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import com.dvidal.samplecurrencies.core.datasource.local.AppDatabase
+import com.dvidal.samplecurrencies.features.currencies.data.local.rates.RateDto
 import com.dvidal.samplecurrencies.utils.getOrAwaitValue
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.runBlocking
@@ -39,7 +40,14 @@ class RatesRemoteDaoTest {
     @Test
     fun `when add rate should return rate`() = runBlocking {
 
-        val dummyRates = listOf(RateDto(symbol = "brl"), RateDto(symbol = "eur"))
+        val dummyRates = listOf(
+            RateDto(
+                symbol = "brl"
+            ),
+            RateDto(
+                symbol = "eur"
+            )
+        )
 
         appDatabase.ratesDao().insertRates(dummyRates)
         val ratesDto = appDatabase.ratesDao().fetchRates()
@@ -49,7 +57,14 @@ class RatesRemoteDaoTest {
     @Test
     fun `when add 2 rates with same symbol should return only 1 rate`() = runBlocking {
 
-        val dummyRates = listOf(RateDto(symbol = "brl"), RateDto(symbol = "brl"))
+        val dummyRates = listOf(
+            RateDto(
+                symbol = "brl"
+            ),
+            RateDto(
+                symbol = "brl"
+            )
+        )
 
         appDatabase.ratesDao().insertRates(dummyRates)
         val ratesDto = appDatabase.ratesDao().fetchRates()
@@ -59,7 +74,14 @@ class RatesRemoteDaoTest {
     @Test
     fun `when add rate and clear should return empty list`() = runBlocking {
 
-        val dummyRates = listOf(RateDto(symbol = "brl"), RateDto(symbol = "eur"))
+        val dummyRates = listOf(
+            RateDto(
+                symbol = "brl"
+            ),
+            RateDto(
+                symbol = "eur"
+            )
+        )
 
         appDatabase.ratesDao().insertRates(dummyRates)
         var ratesDto = appDatabase.ratesDao().fetchRates()
