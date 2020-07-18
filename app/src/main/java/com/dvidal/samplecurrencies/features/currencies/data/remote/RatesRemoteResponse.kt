@@ -1,9 +1,8 @@
 package com.dvidal.samplecurrencies.features.currencies.data.remote
 
-import com.dvidal.samplecurrencies.core.datasource.remote.MyConstants
-import com.dvidal.samplecurrencies.core.datasource.remote.MyConstants.BASE_CURRENCY
-import com.dvidal.samplecurrencies.core.datasource.remote.MyConstants.RATES
-import com.dvidal.samplecurrencies.features.currencies.data.local.basecurrency.BaseCurrencyDto
+import com.dvidal.samplecurrencies.core.common.MyConstants
+import com.dvidal.samplecurrencies.core.common.MyConstants.BASE_CURRENCY
+import com.dvidal.samplecurrencies.core.common.MyConstants.RATES
 import com.squareup.moshi.Json
 
 data class RatesRemoteResponse(

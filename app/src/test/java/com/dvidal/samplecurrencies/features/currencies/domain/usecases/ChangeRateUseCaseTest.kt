@@ -1,7 +1,7 @@
 package com.dvidal.samplecurrencies.features.currencies.domain.usecases
 
 import com.dvidal.samplecurrencies.core.common.Either
-import com.dvidal.samplecurrencies.core.datasource.remote.MyConstants
+import com.dvidal.samplecurrencies.core.common.MyConstants
 import com.dvidal.samplecurrencies.features.currencies.domain.RatesRepository
 import com.dvidal.samplecurrencies.features.currencies.presentation.RatePresentation
 import io.mockk.coEvery

@@ -3,7 +3,7 @@ package com.dvidal.samplecurrencies.features.currencies.data.local.basecurrency
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import com.dvidal.samplecurrencies.core.datasource.local.AppDatabase
-import com.dvidal.samplecurrencies.core.datasource.remote.MyConstants
+import com.dvidal.samplecurrencies.core.common.MyConstants
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals

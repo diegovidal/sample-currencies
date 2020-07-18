@@ -1,4 +1,4 @@
-package com.dvidal.samplecurrencies.core.datasource.remote
+package com.dvidal.samplecurrencies.core.common
 
 /**
  * @author diegovidal on 2020-02-16.

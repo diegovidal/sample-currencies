@@ -2,7 +2,7 @@ package com.dvidal.samplecurrencies.features.currencies.data.local.basecurrency
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.dvidal.samplecurrencies.core.datasource.remote.MyConstants
+import com.dvidal.samplecurrencies.core.common.MyConstants
 
 /**
  * @author diegovidal on 18/07/20.

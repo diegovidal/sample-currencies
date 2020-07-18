@@ -1,7 +1,7 @@
 package com.dvidal.samplecurrencies.features.currencies.data.local.rates
 
 import com.dvidal.samplecurrencies.core.datasource.local.AppDatabase
-import com.dvidal.samplecurrencies.core.datasource.remote.MyConstants
+import com.dvidal.samplecurrencies.core.common.MyConstants
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

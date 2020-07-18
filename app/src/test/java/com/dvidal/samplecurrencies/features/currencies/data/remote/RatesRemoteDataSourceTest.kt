@@ -1,6 +1,6 @@
 package com.dvidal.samplecurrencies.features.currencies.data.remote
 
-import com.dvidal.samplecurrencies.core.datasource.remote.MyConstants
+import com.dvidal.samplecurrencies.core.common.MyConstants
 import com.dvidal.samplecurrencies.core.datasource.remote.NetworkHandler
 import com.dvidal.samplecurrencies.core.datasource.remote.RemoteApi
 import io.mockk.coEvery

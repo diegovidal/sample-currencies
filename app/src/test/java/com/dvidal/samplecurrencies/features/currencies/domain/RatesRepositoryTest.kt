@@ -1,7 +1,7 @@
 package com.dvidal.samplecurrencies.features.currencies.domain
 
 import com.dvidal.samplecurrencies.core.common.Either
-import com.dvidal.samplecurrencies.core.datasource.remote.MyConstants
+import com.dvidal.samplecurrencies.core.common.MyConstants
 import com.dvidal.samplecurrencies.features.currencies.data.local.basecurrency.BaseCurrencyDto
 import com.dvidal.samplecurrencies.features.currencies.data.local.basecurrency.BaseCurrencyLocalDataSource
 import com.dvidal.samplecurrencies.features.currencies.data.local.rates.RateDto

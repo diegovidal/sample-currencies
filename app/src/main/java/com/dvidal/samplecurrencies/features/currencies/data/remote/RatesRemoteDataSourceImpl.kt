@@ -2,7 +2,7 @@ package com.dvidal.samplecurrencies.features.currencies.data.remote
 
 import com.dvidal.samplecurrencies.core.common.BaseRequester
 import com.dvidal.samplecurrencies.core.common.EitherResult
-import com.dvidal.samplecurrencies.core.datasource.remote.MyConstants
+import com.dvidal.samplecurrencies.core.common.MyConstants
 import com.dvidal.samplecurrencies.core.datasource.remote.NetworkHandler
 import com.dvidal.samplecurrencies.core.datasource.remote.RemoteApi
 import javax.inject.Inject
