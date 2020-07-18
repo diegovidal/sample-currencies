@@ -9,7 +9,8 @@ import kotlinx.coroutines.flow.Flow
  */
 interface RatesLocalDataSource {
 
-    suspend fun insertAllRates(listRatesDto: List<RateDto>): EitherResult<Unit>
-    fun fetchAllRates(): EitherResult<Flow<List<RateDto?>>>
+    suspend fun insertAllRates(listRatesDto: List<RateDto?>?): EitherResult<Unit>
+    fun fetchAllRatesAsFlow(): EitherResult<Flow<List<RateDto?>>>
+    suspend fun fetchAllRates(): EitherResult<List<RateDto?>>
     suspend fun clearAllRates(): EitherResult<Unit>
 }

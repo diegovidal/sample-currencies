@@ -50,23 +50,23 @@ class BaseCurrencyDaoTest {
     fun `when try to modify base currency should return the value updated using on conflict strategy`() = runBlocking {
 
         val firstDummyBaseCurrency = BaseCurrencyDto(
-            symbol = MyConstants.EUR,
-            value = 2.0
+            currencySymbol = MyConstants.EUR,
+            euroValue = 2.0
         )
 
         val secondDummyBaseCurrency = BaseCurrencyDto(
-            symbol = MyConstants.BRL,
-            value = 2.0
+            currencySymbol = MyConstants.BRL,
+            euroValue = 2.0
         )
 
         // First time
         appDatabase.baseCurrencyDao().insertBaseCurrency(firstDummyBaseCurrency)
         var baseCurrencyDto = appDatabase.baseCurrencyDao().fetchBaseCurrency()
-        assertEquals(firstDummyBaseCurrency.symbol, baseCurrencyDto?.symbol)
+        assertEquals(firstDummyBaseCurrency.currencySymbol, baseCurrencyDto?.currencySymbol)
 
         // Trying to change
         appDatabase.baseCurrencyDao().insertBaseCurrency(secondDummyBaseCurrency)
         baseCurrencyDto = appDatabase.baseCurrencyDao().fetchBaseCurrency()
-        assertEquals(secondDummyBaseCurrency.symbol, baseCurrencyDto?.symbol)
+        assertEquals(secondDummyBaseCurrency.currencySymbol, baseCurrencyDto?.currencySymbol)
     }
 }

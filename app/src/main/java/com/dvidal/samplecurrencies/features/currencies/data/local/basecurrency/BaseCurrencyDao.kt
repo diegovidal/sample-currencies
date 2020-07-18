@@ -13,7 +13,7 @@ import androidx.room.Query
 interface BaseCurrencyDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertBaseCurrency(currencyDto: BaseCurrencyDto)
+    suspend fun insertBaseCurrency(currencyDto: BaseCurrencyDto?)
 
     @Query("SELECT * FROM baseCurrencyDto WHERE -1 LIMIT 1")
     suspend fun fetchBaseCurrency(): BaseCurrencyDto?

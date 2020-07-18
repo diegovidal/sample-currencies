@@ -1,5 +1,6 @@
 package com.dvidal.samplecurrencies.features.currencies.data.remote
 
+import com.dvidal.samplecurrencies.core.datasource.remote.MyConstants
 import com.dvidal.samplecurrencies.core.datasource.remote.NetworkHandler
 import com.dvidal.samplecurrencies.core.datasource.remote.RemoteApi
 import io.mockk.coEvery
@@ -31,7 +32,7 @@ class RatesRemoteDataSourceTest {
     @Test
     fun `when fetch rates should call remoteApi fetch rates and return a RatesRemoteResponse`() = runBlocking {
 
-        val symbol = "brl"
+        val symbol = MyConstants.EUR
         val expectedRemoteResponse = RatesRemoteResponse.empty()
         coEvery { remoteApi.fetchRates(symbol) } returns expectedRemoteResponse
 

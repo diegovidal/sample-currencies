@@ -15,7 +15,7 @@ class BaseCurrencyLocalDataSourceImpl(
         return catching { appDatabase.baseCurrencyDao().fetchBaseCurrency()  }
     }
 
-    override suspend fun insertBaseCurrency(baseCurrency: BaseCurrencyDto): EitherResult<Unit> {
+    override suspend fun insertBaseCurrency(baseCurrency: BaseCurrencyDto?): EitherResult<Unit> {
         return catching { appDatabase.baseCurrencyDao().insertBaseCurrency(baseCurrency) }
     }
 }

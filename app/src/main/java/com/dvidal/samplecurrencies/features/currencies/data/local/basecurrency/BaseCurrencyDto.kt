@@ -11,6 +11,6 @@ import com.dvidal.samplecurrencies.core.datasource.remote.MyConstants
 @Entity
 data class BaseCurrencyDto(
     @PrimaryKey val id: Int = -1,
-    val symbol: String = MyConstants.EUR,
-    val value: Double = 1.0
+    val currencySymbol: String? = MyConstants.EUR,
+    val euroValue: Double? = 1.0
 )

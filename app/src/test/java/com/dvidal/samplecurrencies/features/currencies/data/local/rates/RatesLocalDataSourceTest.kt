@@ -1,9 +1,6 @@
 package com.dvidal.samplecurrencies.features.currencies.data.local.rates
 
 import com.dvidal.samplecurrencies.core.datasource.local.AppDatabase
-import com.dvidal.samplecurrencies.features.currencies.data.local.rates.RateDto
-import com.dvidal.samplecurrencies.features.currencies.data.local.rates.RatesLocalDataSource
-import com.dvidal.samplecurrencies.features.currencies.data.local.rates.RatesLocalDataSourceImpl
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -58,10 +55,10 @@ class RatesLocalDataSourceTest {
             )
         )
         val dummyFlow = flow { emit(dummyRates) }
-        coEvery { appDatabase.ratesDao().fetchRates() } returns dummyFlow
+        coEvery { appDatabase.ratesDao().fetchRatesAsFlow() } returns dummyFlow
 
-        dataSource.fetchAllRates()
-        coVerify(exactly = 1) { appDatabase.ratesDao().fetchRates()  }
+        dataSource.fetchAllRatesAsFlow()
+        coVerify(exactly = 1) { appDatabase.ratesDao().fetchRatesAsFlow()  }
     }
 
     @Test

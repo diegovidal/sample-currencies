@@ -49,7 +49,7 @@ class RatesDaoTest {
         )
 
         appDatabase.ratesDao().insertRates(dummyRates)
-        val ratesDto = appDatabase.ratesDao().fetchRates()
+        val ratesDto = appDatabase.ratesDao().fetchRatesAsFlow()
         assertEquals(2, ratesDto.getOrAwaitValue().size)
     }
 
@@ -66,7 +66,7 @@ class RatesDaoTest {
         )
 
         appDatabase.ratesDao().insertRates(dummyRates)
-        val ratesDto = appDatabase.ratesDao().fetchRates()
+        val ratesDto = appDatabase.ratesDao().fetchRatesAsFlow()
         assertEquals(1, ratesDto.getOrAwaitValue().size)
     }
 
@@ -83,11 +83,11 @@ class RatesDaoTest {
         )
 
         appDatabase.ratesDao().insertRates(dummyRates)
-        var ratesDto = appDatabase.ratesDao().fetchRates()
+        var ratesDto = appDatabase.ratesDao().fetchRatesAsFlow()
         assertEquals(2, ratesDto.getOrAwaitValue().size)
 
         appDatabase.ratesDao().clearRates()
-        ratesDto = appDatabase.ratesDao().fetchRates()
+        ratesDto = appDatabase.ratesDao().fetchRatesAsFlow()
         assertEquals(0, ratesDto.getOrAwaitValue().size)
     }
 }

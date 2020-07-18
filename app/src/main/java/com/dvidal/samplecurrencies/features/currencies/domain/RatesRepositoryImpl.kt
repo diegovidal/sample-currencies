@@ -1,6 +1,7 @@
 package com.dvidal.samplecurrencies.features.currencies.domain
 
 import com.dvidal.samplecurrencies.core.common.EitherResult
+import com.dvidal.samplecurrencies.features.currencies.data.local.basecurrency.BaseCurrencyLocalDataSource
 import com.dvidal.samplecurrencies.features.currencies.data.local.rates.RateDto
 import com.dvidal.samplecurrencies.features.currencies.data.local.rates.RatesLocalDataSource
 import com.dvidal.samplecurrencies.features.currencies.data.remote.RatesRemoteDataSource
@@ -12,26 +13,43 @@ import kotlinx.coroutines.flow.Flow
  */
 class RatesRepositoryImpl(
     private val ratesLocalDataSource: RatesLocalDataSource,
+    private val baseCurrencyLocalDataSource: BaseCurrencyLocalDataSource,
     private val ratesRemoteDataSource: RatesRemoteDataSource,
     private val dataProducerHandler: DataProducerHandler
 ) : RatesRepository {
 
     override suspend fun refreshRates() {
 
-        val remoteResult = ratesRemoteDataSource.fetchRates()
+        val remoteRatesResult = ratesRemoteDataSource.fetchRates()
+        val localBaseCurrencyResult = baseCurrencyLocalDataSource.fetchBaseCurrency()
 
-        if (remoteResult.isRight) {
-//            val insertDtos = dataProducerHandler.produceData(remoteResult.rightOrNull())
-//            ratesLocalDataSource.insertAllRates(insertDtos)
+        if (remoteRatesResult.isRight) {
+
+            val ratesRemoteResponse = remoteRatesResult.rightOrNull()
+
+            if (localBaseCurrencyResult.rightOrNull() == null)
+                baseCurrencyLocalDataSource.insertBaseCurrency(ratesRemoteResponse?.firstTime())
+
+            val insertDtos = dataProducerHandler.produceData(ratesRemoteResponse, localBaseCurrencyResult.rightOrNull())
+            ratesLocalDataSource.insertAllRates(insertDtos)
         }
     }
 
     override suspend fun changeValue(ratePresentation: RatePresentation) {
-//        val insertDtos = dataProducerHandler.calculateNewValues(ratePresentation)
-//        ratesLocalDataSource.insertAllRates(insertDtos)
+
+        val localRatesResult = ratesLocalDataSource.fetchAllRates().rightOrNull()
+        val rateDto = localRatesResult?.first { ratePresentation.symbol == it?.symbol }
+
+        val baseCurrency = dataProducerHandler.calculateBaseCurrency(rateDto, ratePresentation.value)
+        baseCurrencyLocalDataSource.insertBaseCurrency(baseCurrency)
+
+        val localBaseCurrencyResult = baseCurrencyLocalDataSource.fetchBaseCurrency().rightOrNull()
+
+        val insertDtos = dataProducerHandler.calculateNewValues(localRatesResult, localBaseCurrencyResult?.euroValue)
+        ratesLocalDataSource.insertAllRates(insertDtos)
     }
 
     override fun fetchRates(): EitherResult<Flow<List<RateDto?>>> {
-        return ratesLocalDataSource.fetchAllRates()
+        return ratesLocalDataSource.fetchAllRatesAsFlow().apply {  }
     }
 }

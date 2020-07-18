@@ -8,5 +8,5 @@ import com.dvidal.samplecurrencies.core.common.EitherResult
 interface BaseCurrencyLocalDataSource {
 
     suspend fun fetchBaseCurrency(): EitherResult<BaseCurrencyDto?>
-    suspend fun insertBaseCurrency(baseCurrency: BaseCurrencyDto): EitherResult<Unit>
+    suspend fun insertBaseCurrency(baseCurrency: BaseCurrencyDto?): EitherResult<Unit>
 }

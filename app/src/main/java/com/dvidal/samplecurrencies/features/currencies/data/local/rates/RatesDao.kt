@@ -15,10 +15,13 @@ import kotlinx.coroutines.flow.Flow
 interface RatesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRates(ratesDto: List<RateDto>)
+    suspend fun insertRates(ratesDto: List<RateDto?>?)
 
     @Query("SELECT * FROM rateDto ORDER BY isDefault DESC ")
-    fun fetchRates(): Flow<List<RateDto?>>
+    fun fetchRates(): List<RateDto?>
+
+    @Query("SELECT * FROM rateDto ORDER BY isDefault DESC ")
+    fun fetchRatesAsFlow(): Flow<List<RateDto?>>
 
     @Query("DELETE FROM rateDto")
     suspend fun clearRates()
