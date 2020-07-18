@@ -4,7 +4,7 @@ package com.dvidal.samplecurrencies.core.datasource.remote
  * @author diegovidal on 2020-02-16.
  */
 
-object NetworkConstants {
+object MyConstants {
 
     const val BASE_CURRENCY = "baseCurrency"
     const val RATES = "rates"

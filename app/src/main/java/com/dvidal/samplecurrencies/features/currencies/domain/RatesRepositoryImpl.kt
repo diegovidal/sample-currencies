@@ -21,14 +21,14 @@ class RatesRepositoryImpl(
         val remoteResult = ratesRemoteDataSource.fetchRates()
 
         if (remoteResult.isRight) {
-            val insertDtos = dataProducerHandler.produceData(remoteResult.rightOrNull())
-            ratesLocalDataSource.insertAllRates(insertDtos)
+//            val insertDtos = dataProducerHandler.produceData(remoteResult.rightOrNull())
+//            ratesLocalDataSource.insertAllRates(insertDtos)
         }
     }
 
     override suspend fun changeValue(ratePresentation: RatePresentation) {
-        val insertDtos = dataProducerHandler.calculateNewValues(ratePresentation)
-        ratesLocalDataSource.insertAllRates(insertDtos)
+//        val insertDtos = dataProducerHandler.calculateNewValues(ratePresentation)
+//        ratesLocalDataSource.insertAllRates(insertDtos)
     }
 
     override fun fetchRates(): EitherResult<Flow<List<RateDto?>>> {

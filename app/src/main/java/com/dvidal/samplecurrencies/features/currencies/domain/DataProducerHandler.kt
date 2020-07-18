@@ -1,7 +1,7 @@
 package com.dvidal.samplecurrencies.features.currencies.domain
 
 import com.dvidal.samplecurrencies.R
-import com.dvidal.samplecurrencies.core.datasource.remote.NetworkConstants
+import com.dvidal.samplecurrencies.core.datasource.remote.MyConstants
 import com.dvidal.samplecurrencies.features.currencies.data.local.basecurrency.BaseCurrencyDto
 import com.dvidal.samplecurrencies.features.currencies.data.local.rates.RateDto
 import com.dvidal.samplecurrencies.features.currencies.data.remote.RatesRemoteResponse
@@ -18,47 +18,47 @@ class DataProducerHandler {
 
         val usd =
             RateDto(
-                symbol = NetworkConstants.USD,
+                symbol = MyConstants.USD,
                 name = R.string.symbol_usd,
                 value = baseCurrencyDto.value.times(ratesRemoteResponse?.rates?.usd ?: 1.0),
                 image = R.drawable.ic_launcher_background,
-                isDefault = NetworkConstants.DKK == baseCurrencyDto.symbol
+                isDefault = MyConstants.DKK == baseCurrencyDto.symbol
             )
 
         val brl =
             RateDto(
-                symbol = NetworkConstants.BRL,
+                symbol = MyConstants.BRL,
                 name = R.string.symbol_brl,
                 value = baseCurrencyDto.value.times(ratesRemoteResponse?.rates?.brl ?: 1.0),
                 image = R.drawable.ic_launcher_background,
-                isDefault = NetworkConstants.DKK == baseCurrencyDto.symbol
+                isDefault = MyConstants.DKK == baseCurrencyDto.symbol
             )
 
         val eur =
             RateDto(
-                symbol = NetworkConstants.EUR,
+                symbol = MyConstants.EUR,
                 name = R.string.symbol_eur,
                 value = baseCurrencyDto.value,
                 image = R.drawable.ic_launcher_background,
-                isDefault = NetworkConstants.DKK == baseCurrencyDto.symbol
+                isDefault = MyConstants.DKK == baseCurrencyDto.symbol
             )
 
         val jpy =
             RateDto(
-                symbol = NetworkConstants.JPY,
+                symbol = MyConstants.JPY,
                 name = R.string.symbol_jpy,
                 value = baseCurrencyDto.value.times(ratesRemoteResponse?.rates?.jpy ?: 1.0),
                 image = R.drawable.ic_launcher_background,
-                isDefault = NetworkConstants.DKK == baseCurrencyDto.symbol
+                isDefault = MyConstants.DKK == baseCurrencyDto.symbol
             )
 
         val dkk =
             RateDto(
-                symbol = NetworkConstants.DKK,
+                symbol = MyConstants.DKK,
                 name = R.string.symbol_dkk,
                 value = baseCurrencyDto.value.times(ratesRemoteResponse?.rates?.dkk ?: 1.0),
                 image = R.drawable.ic_launcher_background,
-                isDefault = NetworkConstants.DKK == baseCurrencyDto.symbol
+                isDefault = MyConstants.DKK == baseCurrencyDto.symbol
             )
 
         return listOf(usd, brl, eur, jpy, dkk)

@@ -1,4 +1,4 @@
-package com.dvidal.samplecurrencies.features.currencies.data.local
+package com.dvidal.samplecurrencies.features.currencies.data.local.rates
 
 import com.dvidal.samplecurrencies.core.datasource.local.AppDatabase
 import com.dvidal.samplecurrencies.features.currencies.data.local.rates.RateDto
@@ -16,7 +16,7 @@ import org.junit.Before
 /**
  * @author diegovidal on 17/07/20.
  */
-class RatesRemoteLocalDataSourceTest {
+class RatesLocalDataSourceTest {
 
     private val appDatabase = mockk<AppDatabase>()
     lateinit var dataSource: RatesLocalDataSource

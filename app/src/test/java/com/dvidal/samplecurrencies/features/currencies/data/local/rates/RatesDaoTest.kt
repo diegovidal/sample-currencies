@@ -1,9 +1,8 @@
-package com.dvidal.samplecurrencies.features.currencies.data.local
+package com.dvidal.samplecurrencies.features.currencies.data.local.rates
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import com.dvidal.samplecurrencies.core.datasource.local.AppDatabase
-import com.dvidal.samplecurrencies.features.currencies.data.local.rates.RateDto
 import com.dvidal.samplecurrencies.utils.getOrAwaitValue
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.runBlocking
@@ -19,7 +18,7 @@ import org.robolectric.RuntimeEnvironment
  */
 
 @RunWith(RobolectricTestRunner::class)
-class RatesRemoteDaoTest {
+class RatesDaoTest {
 
     @Rule
     @JvmField
