@@ -69,13 +69,14 @@ class RatesRepositoryTest {
     }
 
     @Test
-    fun `when change value should call for calculate base currency and insert base currency`() = runBlocking {
+    fun `when change value should call for calculate base currency, insert base currency and insert all rates`() = runBlocking {
 
         val list = listOf(RateDto().apply {
             symbol = MyConstants.BRL
             value = 3.0
         })
         coEvery { baseCurrencyLocalDataSource.fetchBaseCurrency() } returns Either.right(BaseCurrencyDto())
+        coEvery { baseCurrencyLocalDataSource.insertBaseCurrency(any()) } returns Either.right(Unit)
         coEvery { ratesLocalDataSource.fetchAllRates() } returns Either.right(list)
         coEvery { ratesLocalDataSource.insertAllRates(any()) } returns Either.right(Unit)
         coEvery { dataProducerHandler.calculateBaseCurrency(any(), any()) } returns BaseCurrencyDto()
@@ -84,6 +85,7 @@ class RatesRepositoryTest {
         repository.changeValue(RatePresentation(symbol = MyConstants.BRL, value = 3.0))
         coVerify(exactly = 1) { dataProducerHandler.calculateBaseCurrency(any(), any())  }
         coVerify(exactly = 1) { baseCurrencyLocalDataSource.insertBaseCurrency(any())  }
+        coVerify(exactly = 1) { ratesLocalDataSource.insertAllRates(any()) }
     }
 
     @Test
