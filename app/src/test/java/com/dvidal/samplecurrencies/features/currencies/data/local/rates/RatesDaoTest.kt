@@ -3,6 +3,7 @@ package com.dvidal.samplecurrencies.features.currencies.data.local.rates
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import com.dvidal.samplecurrencies.core.datasource.local.AppDatabase
+import com.dvidal.samplecurrencies.core.datasource.remote.MyConstants
 import com.dvidal.samplecurrencies.utils.getOrAwaitValue
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.runBlocking
@@ -27,9 +28,7 @@ class RatesDaoTest {
     private val appDatabase = Room.inMemoryDatabaseBuilder(
         RuntimeEnvironment.systemContext,
         AppDatabase::class.java
-    )
-        .allowMainThreadQueries()
-        .build()
+    ).allowMainThreadQueries().build()
 
     @After
     fun closeDb() {
@@ -37,15 +36,11 @@ class RatesDaoTest {
     }
 
     @Test
-    fun `when add rate should return rate`() = runBlocking {
+    fun `when add rate should return rate as flow`() = runBlocking {
 
         val dummyRates = listOf(
-            RateDto(
-                symbol = "brl"
-            ),
-            RateDto(
-                symbol = "eur"
-            )
+            RateDto(symbol = "brl"),
+            RateDto(symbol = "eur")
         )
 
         appDatabase.ratesDao().insertRates(dummyRates)
@@ -54,15 +49,37 @@ class RatesDaoTest {
     }
 
     @Test
+    fun `when add rate should return rate`() = runBlocking {
+
+        val dummyRates = listOf(
+            RateDto(symbol = MyConstants.BRL),
+            RateDto(symbol = MyConstants.EUR)
+        )
+
+        appDatabase.ratesDao().insertRates(dummyRates)
+        val ratesDto = appDatabase.ratesDao().fetchRates()
+        assertEquals(2, ratesDto.size)
+    }
+
+    @Test
+    fun `when add rate and put as default should return list correctly sorted`() = runBlocking {
+
+        val dummyRates = listOf(
+            RateDto(symbol = MyConstants.EUR),
+            RateDto(symbol = MyConstants.BRL, isDefault = true)
+        )
+
+        appDatabase.ratesDao().insertRates(dummyRates)
+        val rateDto = appDatabase.ratesDao().fetchRates().first()
+        assertEquals(MyConstants.BRL, rateDto?.symbol)
+    }
+
+    @Test
     fun `when add 2 rates with same symbol should return only 1 rate`() = runBlocking {
 
         val dummyRates = listOf(
-            RateDto(
-                symbol = "brl"
-            ),
-            RateDto(
-                symbol = "brl"
-            )
+            RateDto(symbol = MyConstants.BRL),
+            RateDto(symbol = MyConstants.BRL)
         )
 
         appDatabase.ratesDao().insertRates(dummyRates)
@@ -74,12 +91,8 @@ class RatesDaoTest {
     fun `when add rate and clear should return empty list`() = runBlocking {
 
         val dummyRates = listOf(
-            RateDto(
-                symbol = "brl"
-            ),
-            RateDto(
-                symbol = "eur"
-            )
+            RateDto(symbol = MyConstants.BRL),
+            RateDto(symbol = MyConstants.EUR)
         )
 
         appDatabase.ratesDao().insertRates(dummyRates)

@@ -1,6 +1,7 @@
 package com.dvidal.samplecurrencies.features.currencies.data.local.rates
 
 import com.dvidal.samplecurrencies.core.datasource.local.AppDatabase
+import com.dvidal.samplecurrencies.core.datasource.remote.MyConstants
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -20,22 +21,16 @@ class RatesLocalDataSourceTest {
 
     @Before
     fun setup() {
-        dataSource =
-            RatesLocalDataSourceImpl(
-                appDatabase
-            )
+
+        dataSource = RatesLocalDataSourceImpl(appDatabase)
     }
 
     @Test
     fun `when insert rates should call ratesDao insert rates`() = runBlocking {
 
         val dummyRates = listOf(
-            RateDto(
-                symbol = "brl"
-            ),
-            RateDto(
-                symbol = "eur"
-            )
+            RateDto(symbol = MyConstants.BRL),
+            RateDto(symbol = MyConstants.EUR)
         )
         coEvery { appDatabase.ratesDao().insertRates(dummyRates) } returns Unit
         dataSource.insertAllRates(dummyRates)
@@ -44,21 +39,31 @@ class RatesLocalDataSourceTest {
     }
 
     @Test
-    fun `when fetch all rates should call ratesDao fetch rates`() = runBlocking {
+    fun `when fetch all rates should call ratesDao fetch rates as flow`() = runBlocking {
 
         val dummyRates = listOf(
-            RateDto(
-                symbol = "brl"
-            ),
-            RateDto(
-                symbol = "eur"
-            )
+            RateDto(symbol = MyConstants.BRL),
+            RateDto(symbol = MyConstants.EUR)
         )
         val dummyFlow = flow { emit(dummyRates) }
         coEvery { appDatabase.ratesDao().fetchRatesAsFlow() } returns dummyFlow
 
         dataSource.fetchAllRatesAsFlow()
         coVerify(exactly = 1) { appDatabase.ratesDao().fetchRatesAsFlow()  }
+    }
+
+    @Test
+    fun `when fetch all rates should call ratesDao fetch rates`() = runBlocking {
+
+        val dummyRates = listOf(
+            RateDto(symbol = MyConstants.BRL),
+            RateDto(symbol = MyConstants.EUR)
+        )
+        val dummyFlow = flow { emit(dummyRates) }
+        coEvery { appDatabase.ratesDao().fetchRatesAsFlow() } returns dummyFlow
+
+        dataSource.fetchAllRates()
+        coVerify(exactly = 1) { appDatabase.ratesDao().fetchRates()  }
     }
 
     @Test
