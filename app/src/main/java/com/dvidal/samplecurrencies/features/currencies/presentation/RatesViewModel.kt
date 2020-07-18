@@ -24,13 +24,14 @@ class RatesViewModel @Inject constructor(
     private val refreshRatesUseCase: FetchRatesUseCase
 ): BaseViewModel(), RatesViewContract.ViewModel {
 
-    @VisibleForTesting
-    val action = SingleLiveEvent<RatesViewContract.Action>()
+    private val action = SingleLiveEvent<RatesViewContract.Action>()
 
-    private val _requestFetchRates = MutableLiveData<List<RateDto?>>()
+    @VisibleForTesting
+    val requestFetchRates = MutableLiveData<List<RateDto?>>()
+
     private val _states = MediatorLiveData<RatesViewContract.ViewState.State>().apply {
 
-        addSource(_requestFetchRates) { list ->
+        addSource(requestFetchRates) { list ->
             ratesMapper.mapperListToRatePresentation(list).also { listConverted ->
                 if (listConverted.isNotEmpty()) {
                     postValue(RatesViewContract.ViewState.State.RatesSuccessState(RatesPresentationResponse(listConverted)))
@@ -84,7 +85,7 @@ class RatesViewModel @Inject constructor(
                 _states.apply {
                     viewModelScope.launch(Dispatchers.Main) {
                         addSource(result.asLiveData()) { list ->
-                            _requestFetchRates.postValue(list)
+                            requestFetchRates.postValue(list)
                         }
                     }
                 }

@@ -82,6 +82,7 @@ dependencies {
     testImplementation unitTestDependencies.archCore
     testImplementation unitTestDependencies.lifeCycleLiveData
     testImplementation unitTestDependencies.robolectric
+    testImplementation unitTestDependencies.coroutineTest
 
     // Integration Testing
     androidTestImplementation integrationTestDependencies.extJunit

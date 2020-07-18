@@ -73,7 +73,8 @@ ext {
             mockk:                  "io.mockk:mockk:$mockk_version",
             archCore:               "androidx.arch.core:core-testing:$archCore_version",
             robolectric:            "org.robolectric:robolectric:$roboletric_version",
-            lifeCycleLiveData:      "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+            lifeCycleLiveData:      "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version",
+            coroutineTest:          "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
     ]
 
     integrationTesting = [
