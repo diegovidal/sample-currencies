@@ -1,7 +1,6 @@
 package com.dvidal.samplecurrencies.features.currencies.presentation
 
-import androidx.lifecycle.MediatorLiveData
-import com.dvidal.samplecurrencies.core.common.SingleLiveEvent
+import androidx.lifecycle.LiveData
 
 /**
  * @author diegovidal on 18/07/20.
@@ -10,8 +9,8 @@ sealed class RatesViewContract {
 
     interface ViewModel {
 
-        val states: MediatorLiveData<ViewState.State>
-        val events: SingleLiveEvent<ViewState.Event>
+        val states: LiveData<ViewState.State>
+        val events: LiveData<ViewState.Event>
 
         fun invokeAction(actionToInvoke: Action)
     }

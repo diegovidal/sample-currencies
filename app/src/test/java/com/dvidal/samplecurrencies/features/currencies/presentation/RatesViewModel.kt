@@ -1,10 +1,7 @@
 package com.dvidal.samplecurrencies.features.currencies.presentation
 
 import androidx.annotation.VisibleForTesting
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.dvidal.samplecurrencies.core.common.BaseCoroutineDispatcher
 import com.dvidal.samplecurrencies.core.common.BaseViewModel
 import com.dvidal.samplecurrencies.core.common.SingleLiveEvent
@@ -21,6 +18,7 @@ import javax.inject.Inject
  */
 class RatesViewModel @Inject constructor(
     private val dispatcher: BaseCoroutineDispatcher,
+    private val ratesMapper: RatesMapper,
     private val fetchRatesUseCase: FetchRatesUseCase,
     private val changeRateUseCase: ChangeRateUseCase,
     private val refreshRatesUseCase: FetchRatesUseCase
@@ -30,22 +28,26 @@ class RatesViewModel @Inject constructor(
     val action = SingleLiveEvent<RatesViewContract.Action>()
 
     private val _requestFetchRates = MutableLiveData<List<RateDto?>>()
-
-    override val states = MediatorLiveData<RatesViewContract.ViewState.State>().apply {
+    private val _states = MediatorLiveData<RatesViewContract.ViewState.State>().apply {
 
         addSource(_requestFetchRates) { list ->
-            val listConverted = list.map { rateDto -> rateDto?.mapperToRatePresentation() }
-            if (listConverted.isNotEmpty()) {
-                postValue(RatesViewContract.ViewState.State.RatesSuccessState(RatesPresentationResponse(listConverted)))
+            ratesMapper.mapperListToRatePresentation(list).also { listConverted ->
+                if (listConverted.isNotEmpty()) {
+                    postValue(RatesViewContract.ViewState.State.RatesSuccessState(RatesPresentationResponse(listConverted)))
+                }
             }
         }
     }
-    override val events = SingleLiveEvent<RatesViewContract.ViewState.Event>().apply {
+
+    private val _events = SingleLiveEvent<RatesViewContract.ViewState.Event>().apply {
 
         addSource(action) {
             handleAction(it)
         }
     }
+
+    override val states: LiveData<RatesViewContract.ViewState.State> = _states
+    override val events: LiveData<RatesViewContract.ViewState.Event> = _events
 
     override fun invokeAction(actionToInvoke: RatesViewContract.Action) {
         action.postValue(actionToInvoke)
@@ -74,12 +76,12 @@ class RatesViewModel @Inject constructor(
 
     private suspend fun fetchRates() {
 
-        states.postValue(RatesViewContract.ViewState.State.RatesLoadingState)
+        _states.postValue(RatesViewContract.ViewState.State.RatesLoadingState)
         fetchRatesUseCase.invoke(UseCase.None()).also {
 
             it.either(::handleFailure) { result ->
 
-                states.apply {
+                _states.apply {
                     viewModelScope.launch(Dispatchers.Main) {
                         addSource(result.asLiveData()) { list ->
                             _requestFetchRates.postValue(list)
