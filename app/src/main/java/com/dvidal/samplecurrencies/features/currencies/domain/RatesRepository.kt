@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
  */
 interface RatesRepository {
 
-    suspend fun refreshRates()
-    suspend fun changeValue(ratePresentation: RatePresentation)
+    suspend fun refreshRates(): EitherResult<Unit>
+    suspend fun changeValue(ratePresentation: RatePresentation): EitherResult<Unit>
     fun fetchRates(): EitherResult<Flow<List<RateDto?>>>
 }

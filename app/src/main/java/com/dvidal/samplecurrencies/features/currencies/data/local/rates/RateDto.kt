@@ -2,6 +2,7 @@ package com.dvidal.samplecurrencies.features.currencies.data.local.rates
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.dvidal.samplecurrencies.features.currencies.presentation.RatePresentation
 
 /**
  * @author diegovidal on 17/07/20.
@@ -13,4 +14,12 @@ data class RateDto(
     var value: Double? = -1.0,
     val image: Int = -1,
     val isDefault: Boolean = false
-)
+) {
+
+    fun mapperToRatePresentation() = RatePresentation(
+        symbol = this.symbol,
+        value = this.value,
+        image = this.image,
+        isDefault = this.isDefault
+    )
+}

@@ -11,11 +11,6 @@ data class RatesRemoteResponse(
     @Json(name = RATES) val rates: RatesRemote?
 ) {
 
-    fun firstTime() = BaseCurrencyDto(
-        currencySymbol = MyConstants.EUR,
-        euroValue = 1.0
-    )
-
     companion object {
         fun empty() = RatesRemoteResponse(null, null)
     }

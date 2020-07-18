@@ -13,4 +13,13 @@ data class BaseCurrencyDto(
     @PrimaryKey val id: Int = -1,
     val currencySymbol: String? = MyConstants.EUR,
     val euroValue: Double? = 1.0
-)
+) {
+
+    companion object {
+
+        fun firstTime() = BaseCurrencyDto(
+            currencySymbol = MyConstants.EUR,
+            euroValue = 1.0
+        )
+    }
+}
