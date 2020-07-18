@@ -1,6 +1,5 @@
 package com.dvidal.samplecurrencies.features.currencies.domain
 
-import com.dvidal.samplecurrencies.core.common.Either
 import com.dvidal.samplecurrencies.core.common.EitherResult
 import com.dvidal.samplecurrencies.core.common.catching
 import com.dvidal.samplecurrencies.features.currencies.data.local.basecurrency.BaseCurrencyDto
