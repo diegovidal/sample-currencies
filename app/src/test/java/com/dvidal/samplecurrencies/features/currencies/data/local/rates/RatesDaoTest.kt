@@ -5,9 +5,9 @@ import androidx.room.Room
 import com.dvidal.samplecurrencies.core.datasource.local.AppDatabase
 import com.dvidal.samplecurrencies.core.datasource.remote.MyConstants
 import com.dvidal.samplecurrencies.utils.getOrAwaitValue
-import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.runBlocking
 import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

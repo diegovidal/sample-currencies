@@ -43,7 +43,7 @@ class RatesRepositoryImpl(
         }
     }
 
-    override suspend fun changeValue(ratePresentation: RatePresentation): EitherResult<Unit> {
+    override suspend fun changeRate(ratePresentation: RatePresentation): EitherResult<Unit> {
 
         return catching {
 

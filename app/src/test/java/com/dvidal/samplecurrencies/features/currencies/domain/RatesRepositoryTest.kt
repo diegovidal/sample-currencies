@@ -81,7 +81,7 @@ class RatesRepositoryTest {
         coEvery { dataProducerHandler.calculateBaseCurrency(any(), any()) } returns BaseCurrencyDto()
         coEvery { dataProducerHandler.calculateNewValues(any(), any()) } returns list
 
-        repository.changeValue(RatePresentation(symbol = MyConstants.BRL, value = 3.0))
+        repository.changeRate(RatePresentation(symbol = MyConstants.BRL, value = 3.0))
         coVerify(exactly = 1) { dataProducerHandler.calculateBaseCurrency(any(), any())  }
         coVerify(exactly = 1) { baseCurrencyLocalDataSource.insertBaseCurrency(any())  }
         coVerify(exactly = 1) { ratesLocalDataSource.insertAllRates(any()) }
