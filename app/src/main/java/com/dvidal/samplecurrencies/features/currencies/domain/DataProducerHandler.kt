@@ -22,7 +22,7 @@ class DataProducerHandler {
                 name = R.string.symbol_usd,
                 value = baseCurrencyDto?.euroValue?.times(ratesRemoteResponse?.rates?.usd ?: 1.0),
                 image = R.drawable.ic_launcher_background,
-                isDefault = MyConstants.DKK == baseCurrencyDto?.currencySymbol
+                isDefault = MyConstants.USD == baseCurrencyDto?.currencySymbol
             )
 
         val brl =
@@ -31,7 +31,7 @@ class DataProducerHandler {
                 name = R.string.symbol_brl,
                 value = baseCurrencyDto?.euroValue?.times(ratesRemoteResponse?.rates?.brl ?: 1.0),
                 image = R.drawable.ic_launcher_background,
-                isDefault = MyConstants.DKK == baseCurrencyDto?.currencySymbol
+                isDefault = MyConstants.BRL == baseCurrencyDto?.currencySymbol
             )
 
         val eur =
@@ -40,7 +40,7 @@ class DataProducerHandler {
                 name = R.string.symbol_eur,
                 value = baseCurrencyDto?.euroValue,
                 image = R.drawable.ic_launcher_background,
-                isDefault = MyConstants.DKK == baseCurrencyDto?.currencySymbol
+                isDefault = MyConstants.EUR == baseCurrencyDto?.currencySymbol
             )
 
         val jpy =
@@ -49,7 +49,7 @@ class DataProducerHandler {
                 name = R.string.symbol_jpy,
                 value = baseCurrencyDto?.euroValue?.times(ratesRemoteResponse?.rates?.jpy ?: 1.0),
                 image = R.drawable.ic_launcher_background,
-                isDefault = MyConstants.DKK == baseCurrencyDto?.currencySymbol
+                isDefault = MyConstants.JPY == baseCurrencyDto?.currencySymbol
             )
 
         val dkk =
@@ -64,8 +64,8 @@ class DataProducerHandler {
         return listOf(usd, brl, eur, jpy, dkk)
     }
 
-    fun calculateNewValues(ratesDto: List<RateDto?>?, baseCurrencyValue: Double?): List<RateDto?>? {
-        ratesDto?.forEach { it?.value = baseCurrencyValue?.div(it?.value ?: 1.0) }
+    fun calculateNewValues(ratesDto: List<RateDto?>?, euroValue: Double?): List<RateDto?>? {
+        ratesDto?.forEach { it?.value = euroValue?.times(it?.value ?: 1.0) }
         return ratesDto
     }
 

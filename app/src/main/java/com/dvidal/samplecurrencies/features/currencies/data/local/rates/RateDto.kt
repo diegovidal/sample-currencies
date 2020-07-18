@@ -9,7 +9,7 @@ import com.dvidal.samplecurrencies.features.currencies.presentation.RatePresenta
  */
 @Entity
 data class RateDto(
-    @PrimaryKey val symbol: String = "",
+    @PrimaryKey var symbol: String = "",
     val name: Int = -1,
     var value: Double? = -1.0,
     val image: Int = -1,
