@@ -19,13 +19,12 @@ import javax.inject.Inject
  * @author diegovidal on 18/07/20.
  */
 class RatesViewModel @Inject constructor(
-    application: Application,
     private val dispatcher: BaseCoroutineDispatcher,
     private val ratesMapper: RatesMapper,
     private val fetchRatesUseCase: FetchRatesUseCase,
     private val changeRateUseCase: ChangeRateUseCase,
     private val refreshRatesUseCase: RefreshRatesUseCase
-): BaseViewModel(application), RatesViewContract.ViewModel {
+): BaseViewModel(), RatesViewContract.ViewModel {
 
     private val action = SingleLiveEvent<RatesViewContract.Action>()
 

@@ -38,7 +38,6 @@ class RatesViewModelTest {
     @get:Rule
     var coroutineRule = MainCoroutineRule()
 
-    private val application = mockk<Application>()
     private val dispatcher = mockk<BaseCoroutineDispatcher>()
     private val ratesMapper = mockk<RatesMapper>(relaxUnitFun = true)
     private val fetchRatesUseCase = mockk<FetchRatesUseCase>(relaxUnitFun = true)
@@ -50,7 +49,7 @@ class RatesViewModelTest {
     @Before
     fun setup() {
 
-        viewModel = RatesViewModel(application, dispatcher, ratesMapper, fetchRatesUseCase, changeRateUseCase, refreshRatesUseCase)
+        viewModel = RatesViewModel(dispatcher, ratesMapper, fetchRatesUseCase, changeRateUseCase, refreshRatesUseCase)
         mockDispatcher()
         viewModel.events.observeForever {  }
     }
