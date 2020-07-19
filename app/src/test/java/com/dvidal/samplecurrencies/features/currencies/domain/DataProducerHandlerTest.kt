@@ -5,7 +5,8 @@ import com.dvidal.samplecurrencies.features.currencies.data.local.basecurrency.B
 import com.dvidal.samplecurrencies.features.currencies.data.local.rates.RateDto
 import com.dvidal.samplecurrencies.features.currencies.data.remote.RatesRemote
 import com.dvidal.samplecurrencies.features.currencies.data.remote.RatesRemoteResponse
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /**

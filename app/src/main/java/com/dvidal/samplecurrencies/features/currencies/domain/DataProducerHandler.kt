@@ -90,7 +90,7 @@ class DataProducerHandler {
     fun calculateNewEuroValue(list: List<RateDto?>, baseCurrency: BaseCurrencyDto?, ratesRemoteResponse: RatesRemoteResponse?): BaseCurrencyDto? {
 
         val simpleValue = list.first { it?.symbol == MyConstants.DKK }?.value
-        var newValue = (baseCurrency?.euroValue?.times(ratesRemoteResponse?.rates?.dkk ?: 1.0))?.div(simpleValue ?: 1.0)
+        val newValue = (baseCurrency?.euroValue?.times(ratesRemoteResponse?.rates?.dkk ?: 1.0))?.div(simpleValue ?: 1.0)
         val currentValue = baseCurrency?.euroValue?.times(newValue ?: 1.0)
         return baseCurrency.also {
            it?. euroValue = currentValue ?: 1.0
