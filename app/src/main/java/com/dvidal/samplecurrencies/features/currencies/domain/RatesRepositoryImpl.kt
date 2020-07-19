@@ -52,16 +52,14 @@ class RatesRepositoryImpl(
             val localRatesResult = ratesLocalDataSource.fetchAllRates().rightOrNull()
             val rateDto = localRatesResult?.first { ratePresentation.symbol == it?.symbol }
 
-            val baseCurrency =
-                dataProducerHandler.calculateBaseCurrency(rateDto, ratePresentation.value)
+            val baseCurrency = dataProducerHandler.calculateBaseCurrency(rateDto, ratePresentation.value)
             baseCurrencyLocalDataSource.insertBaseCurrency(baseCurrency)
 
-            val localBaseCurrencyResult =
-                baseCurrencyLocalDataSource.fetchBaseCurrency().rightOrNull()
+            val localBaseCurrencyResult = baseCurrencyLocalDataSource.fetchBaseCurrency().rightOrNull()
 
             val insertDtos = dataProducerHandler.calculateNewValues(
                 localRatesResult,
-                localBaseCurrencyResult?.euroValue
+                localBaseCurrencyResult
             )
 
             return ratesLocalDataSource.insertAllRates(insertDtos)

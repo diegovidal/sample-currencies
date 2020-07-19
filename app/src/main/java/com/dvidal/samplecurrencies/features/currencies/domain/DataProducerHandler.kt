@@ -64,8 +64,11 @@ class DataProducerHandler {
         return listOf(usd, brl, eur, jpy, dkk)
     }
 
-    fun calculateNewValues(ratesDto: List<RateDto?>?, euroValue: Double?): List<RateDto?>? {
-        ratesDto?.forEach { it?.value = euroValue?.times(it?.value ?: 1.0) }
+    fun calculateNewValues(ratesDto: List<RateDto?>?, baseCurrency: BaseCurrencyDto?): List<RateDto?>? {
+        ratesDto?.forEach {
+            it?.value = baseCurrency?.euroValue?.times(it?.value ?: 1.0)
+            it?.isDefault = it?.symbol == baseCurrency?.currencySymbol
+        }
         return ratesDto
     }
 

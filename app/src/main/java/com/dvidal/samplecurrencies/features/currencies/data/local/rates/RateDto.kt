@@ -13,7 +13,7 @@ data class RateDto(
     val name: Int = -1,
     var value: Double? = -1.0,
     val image: Int = -1,
-    val isDefault: Boolean = false
+    var isDefault: Boolean = false
 ) {
 
     fun mapperToRatePresentation() = RatePresentation(

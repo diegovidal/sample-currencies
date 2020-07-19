@@ -51,6 +51,7 @@ class RatesFragment: BaseFragment() {
     private fun eventClick(view: View) {
 
         list[3]?.let { rate ->
+            rate.value = 1.0
             viewModel.invokeAction(RatesViewContract.Action.ChangeRateAction(rate))
         }
     }

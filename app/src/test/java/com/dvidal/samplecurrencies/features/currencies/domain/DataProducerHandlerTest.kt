@@ -77,7 +77,7 @@ class DataProducerHandlerTest {
         })
 
         val expected = 12.0
-        val result = handler.calculateNewValues(listDto, 4.0)
+        val result = handler.calculateNewValues(listDto, BaseCurrencyDto(euroValue = 4.0))
         val actual = result?.find { it?.symbol == MyConstants.BRL }?.value
         assertEquals(expected, actual)
     }
