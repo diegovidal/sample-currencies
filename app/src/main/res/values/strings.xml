@@ -6,4 +6,6 @@
     <string name="symbol_eur">Euro</string>
     <string name="symbol_jpy">Japanese Yen</string>
     <string name="symbol_dkk">Danish Krone</string>
+
+    <string name="default_na">N/A</string>
 </resources>

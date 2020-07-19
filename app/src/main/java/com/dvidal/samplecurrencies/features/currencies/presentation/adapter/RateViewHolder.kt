@@ -6,6 +6,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.dvidal.samplecurrencies.R
 import com.dvidal.samplecurrencies.core.extension.hideKeyboard
 import com.dvidal.samplecurrencies.features.currencies.presentation.RatePresentation
 import kotlinx.android.synthetic.main.recycler_item_rate.view.*
@@ -33,7 +34,7 @@ class RateViewHolder(
             .into(view.iv_rate_flag)
 
         view.tv_rate_symbol?.text = ratePresentation?.symbol
-        view.tv_rate_name?.text = context.getString(ratePresentation?.name ?: -1)
+        view.tv_rate_name?.text = context.getString(ratePresentation?.name ?: R.string.default_na)
 
         view.et_rate_value?.setText(ratePresentation?.value.toString())
 
