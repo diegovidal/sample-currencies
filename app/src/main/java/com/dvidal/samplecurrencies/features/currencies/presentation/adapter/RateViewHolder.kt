@@ -6,6 +6,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.dvidal.samplecurrencies.core.extension.hideKeyboard
 import com.dvidal.samplecurrencies.features.currencies.presentation.RatePresentation
 import kotlinx.android.synthetic.main.recycler_item_rate.view.*
 
@@ -48,6 +49,7 @@ class RateViewHolder(
         view.setOnClickListener {
 
             if (rate?.isDefault == false) {
+                view.et_rate_value?.hideKeyboard()
                 listener?.onChangeRateValue(rate)
             }
         }
@@ -59,7 +61,7 @@ class RateViewHolder(
             try {
                 val newValue = p0.toString().toDoubleOrNull()
 
-                if (newValue != null && newValue > 0.0 && rate?.isDefault == true) {
+                if (newValue != null && newValue > 0.0 && rate?.isDefault == true && rate?.value != newValue) {
                     rate?.value = newValue
                     listener?.onChangeRateValue(rate)
                 }

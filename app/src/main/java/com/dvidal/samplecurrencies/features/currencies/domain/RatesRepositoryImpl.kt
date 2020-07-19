@@ -1,5 +1,8 @@
 package com.dvidal.samplecurrencies.features.currencies.domain
 
+import android.content.Context
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import com.dvidal.samplecurrencies.core.common.EitherResult
 import com.dvidal.samplecurrencies.core.common.catching
 import com.dvidal.samplecurrencies.features.currencies.data.local.basecurrency.BaseCurrencyDto
@@ -35,10 +38,11 @@ class RatesRepositoryImpl(
             if (remoteRatesResult.isRight) {
 
                 val ratesRemoteResponse = remoteRatesResult.rightOrNull()
+                val baseCurrencyResponse = localBaseCurrencyResult.rightOrNull()
 
                 val insertDtos = dataProducerHandler.produceData(
                     ratesRemoteResponse,
-                    localBaseCurrencyResult.rightOrNull()
+                    baseCurrencyResponse
                 )
                 ratesLocalDataSource.insertAllRates(insertDtos)
             }
