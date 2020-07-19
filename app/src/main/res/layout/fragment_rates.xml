@@ -11,8 +11,8 @@
 
     <ProgressBar
         android:id="@+id/pb_rates"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="@dimen/pb_rates_size"
+        android:layout_height="@dimen/pb_rates_size"
         android:layout_gravity="center"/>
 
 </FrameLayout>

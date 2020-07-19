@@ -5,12 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:padding="@dimen/padding_margin_m">
 
     <ImageView
         android:id="@+id/iv_rate_flag"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="@dimen/iv_rate_flag_size"
+        android:layout_height="@dimen/iv_rate_flag_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -18,8 +18,11 @@
         android:id="@+id/tv_rate_symbol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/padding_margin_m"
         tools:text="EUR"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size_mx"
+        android:textColor="@color/primary_text"
         android:textAllCaps="true"
         app:layout_constraintStart_toEndOf="@+id/iv_rate_flag"
         app:layout_constraintTop_toTopOf="@+id/iv_rate_flag" />
@@ -28,14 +31,16 @@
         android:id="@+id/tv_rate_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="@dimen/padding_margin_s"
         tools:text="Euro"
+        android:textColor="@color/secondary_text"
+        android:textSize="@dimen/text_size_m"
         app:layout_constraintStart_toStartOf="@+id/tv_rate_symbol"
         app:layout_constraintTop_toBottomOf="@+id/tv_rate_symbol" />
 
     <EditText
         android:id="@+id/et_rate_value"
-        android:layout_width="80dp"
+        android:layout_width="@dimen/et_rate_width"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:maxLength="7"
