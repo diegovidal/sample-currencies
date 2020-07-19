@@ -39,6 +39,8 @@ class RatesFragment: BaseFragment(), RateViewHolderListener {
         viewModel.states.observe(viewLifecycleOwner, Observer(::renderStates))
         viewModel.events.observe(viewLifecycleOwner, Observer(::renderEvents))
         viewModel.invokeAction(RatesViewContract.Action.InitPageAction)
+
+        fab_test?.setOnClickListener { viewModel.invokeAction(RatesViewContract.Action.InitPageAction) }
     }
 
     private fun renderStates(state: RatesViewContract.ViewState.State) {

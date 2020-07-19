@@ -22,9 +22,20 @@ class RatesAdapter @Inject constructor(): RecyclerView.Adapter<RateViewHolder>()
 
     fun updateDataSet(list: List<RatePresentation?>) {
 
-        val diffResultComplete = DiffUtil.calculateDiff(RatesDiffCallback(this.dataSet, list))
-        diffResultComplete.dispatchUpdatesTo(this)
-        this.dataSet = list
+        if (dataSet.isNotEmpty() && verifyIfChangeDefaultRate(list)){
+            notifyItemRangeChanged(1, dataSet.size)
+        } else {
+            val diffResultComplete = DiffUtil.calculateDiff(RatesDiffCallback(this.dataSet, list))
+            diffResultComplete.dispatchUpdatesTo(this)
+        }.also { this.dataSet = list }
+    }
+
+    private fun verifyIfChangeDefaultRate(list: List<RatePresentation?>): Boolean {
+
+        val oldRate = dataSet.first {it?.isDefault == true}
+        val newRate = list.first {it?.isDefault == true}
+
+        return oldRate?.symbol == newRate?.symbol
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RateViewHolder {

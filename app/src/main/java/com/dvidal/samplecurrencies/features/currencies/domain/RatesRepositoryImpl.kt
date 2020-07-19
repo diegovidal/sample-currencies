@@ -1,6 +1,7 @@
 package com.dvidal.samplecurrencies.features.currencies.domain
 
 import com.dvidal.samplecurrencies.core.common.EitherResult
+import com.dvidal.samplecurrencies.core.common.MyConstants
 import com.dvidal.samplecurrencies.core.common.catching
 import com.dvidal.samplecurrencies.features.currencies.data.local.basecurrency.BaseCurrencyDto
 import com.dvidal.samplecurrencies.features.currencies.data.local.basecurrency.BaseCurrencyLocalDataSource
@@ -9,6 +10,7 @@ import com.dvidal.samplecurrencies.features.currencies.data.local.rates.RatesLoc
 import com.dvidal.samplecurrencies.features.currencies.data.remote.RatesRemoteDataSource
 import com.dvidal.samplecurrencies.features.currencies.presentation.RatePresentation
 import kotlinx.coroutines.flow.Flow
+import kotlin.time.times
 
 /**
  * @author diegovidal on 18/07/20.
@@ -21,7 +23,6 @@ class RatesRepositoryImpl(
 ) : RatesRepository {
 
     private var listRates: List<RateDto?> = emptyList()
-
     override suspend fun refreshRates(): EitherResult<Unit> {
 
         return catching {
@@ -31,8 +32,14 @@ class RatesRepositoryImpl(
 
             if (localBaseCurrencyResult.rightOrNull() == null) {
                 baseCurrencyLocalDataSource.insertBaseCurrency(BaseCurrencyDto.firstTime())
-                localBaseCurrencyResult = baseCurrencyLocalDataSource.fetchBaseCurrency()
+            } else if (listRates.isNotEmpty()) {
+
+                val newBaseCurrency = dataProducerHandler.calculateNewEuroValue(listRates, localBaseCurrencyResult.rightOrNull(),
+                    remoteRatesResult.rightOrNull())
+                baseCurrencyLocalDataSource.insertBaseCurrency(newBaseCurrency)
             }
+
+            localBaseCurrencyResult = baseCurrencyLocalDataSource.fetchBaseCurrency()
 
             if (remoteRatesResult.isRight) {
 
@@ -55,16 +62,12 @@ class RatesRepositoryImpl(
         return catching {
 
             val rateDto = listRates.first { ratePresentation.symbol == it?.symbol }
-
             val baseCurrency = dataProducerHandler.calculateBaseCurrency(rateDto, ratePresentation.value)
-            baseCurrencyLocalDataSource.insertBaseCurrency(baseCurrency)
 
-            val localBaseCurrencyResult = baseCurrencyLocalDataSource.fetchBaseCurrency().rightOrNull()
+            val insertDtos = dataProducerHandler.calculateNewValues(listRates, baseCurrency)
 
-            val insertDtos = dataProducerHandler.calculateNewValues(
-                listRates,
-                localBaseCurrencyResult
-            )
+            val euro = insertDtos?.first { it?.symbol == MyConstants.EUR }?.value
+            baseCurrencyLocalDataSource.insertBaseCurrency(BaseCurrencyDto(currencySymbol = ratePresentation.symbol, euroValue = euro))
 
             insertDtos?.let { listRates = it }
             return ratesLocalDataSource.insertAllRates(insertDtos)
