@@ -5,7 +5,7 @@ import com.dvidal.samplecurrencies.core.datasource.remote.RemoteFailure
 import timber.log.Timber
 
 /**
- * @author diegovidal on 2020-02-15.
+ * @author diegovidal on 2020-07-18.
  */
 
 abstract class BaseRequester(

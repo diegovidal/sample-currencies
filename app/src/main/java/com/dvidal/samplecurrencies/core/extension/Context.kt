@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 
 /**
- * @author diegovidal on 2020-02-15.
+ * @author diegovidal on 2020-07-18.
  */
 
 val Context.networkInfo: NetworkInfo? get() =

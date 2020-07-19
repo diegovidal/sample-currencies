@@ -14,7 +14,7 @@ buildscript {
     ext.application_id = 'com.dvidal.samplecurrencies'
     ext.version_name = '1.0'
     ext.version_code = 1
-    ext.test_runner = 'com.dvidal.samplereviews.EspressoTestRunner'
+    ext.test_runner = 'com.dvidal.samplecurrencies.EspressoTestRunner'
 
 
     repositories {

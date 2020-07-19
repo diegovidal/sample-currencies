@@ -6,7 +6,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * @author diegovidal on 2020-02-15.
+ * @author diegovidal on 2020-07-18.
  */
 
 @Singleton

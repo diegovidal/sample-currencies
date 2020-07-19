@@ -1,9 +1,10 @@
 package com.dvidal.samplecurrencies.core.common
 
 import androidx.lifecycle.ViewModelProvider
+import com.dvidal.samplecurrencies.core.di.component.ActivityComponent
 
 /**
- * @author diegovidal on 2020-02-18.
+ * @author diegovidal on 2020-07-18.
  */
 interface BaseAppComponent {
 

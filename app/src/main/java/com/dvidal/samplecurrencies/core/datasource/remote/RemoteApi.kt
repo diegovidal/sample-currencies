@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 /**
- * @author diegovidal on 2020-02-15.
+ * @author diegovidal on 2020-07-18.
  */
 interface RemoteApi {
 

@@ -26,7 +26,7 @@ class FetchRatesUseCaseTest {
     }
 
     @Test
-    fun `when run use case should call repository fetch reviews`() = runBlocking {
+    fun `when run use case should call repository fetch rates`() = runBlocking {
 
         val list = listOf(RateDto())
         val flowSource = flow { emit(list) }

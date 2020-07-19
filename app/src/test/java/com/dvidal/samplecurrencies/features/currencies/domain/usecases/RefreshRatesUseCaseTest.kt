@@ -25,7 +25,7 @@ class RefreshRatesUseCaseTest {
     }
 
     @Test
-    fun `when run use case should call repository fetch reviews`() = runBlocking {
+    fun `when run use case should call repository refresh rates`() = runBlocking {
 
         coEvery { repository.refreshRates() } returns Either.right(Unit)
 

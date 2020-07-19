@@ -1,7 +1,7 @@
 package com.dvidal.samplecurrencies.core.common
 
 /**
- * @author diegovidal on 2020-02-16.
+ * @author diegovidal on 2020-07-18.
  */
 
 object MyConstants {

@@ -25,7 +25,7 @@ class ChangeRateUseCaseTest {
     }
 
     @Test
-    fun `when run use case should call repository fetch reviews`() = runBlocking {
+    fun `when run use case should call repository change rate`() = runBlocking {
 
         val ratePresentation = RatePresentation(symbol = MyConstants.BRL)
         coEvery { repository.changeRate(ratePresentation) } returns Either.right(Unit)
