@@ -11,6 +11,14 @@ import com.dvidal.samplecurrencies.features.currencies.data.remote.RatesRemoteRe
  */
 class DataProducerHandler {
 
+    private var listRates: List<RateDto?> = emptyList()
+
+    fun fetchListRates() = listRates
+
+    fun updateListRates(list: List<RateDto?>) {
+        listRates = list
+    }
+
     fun produceData(
         ratesRemoteResponse: RatesRemoteResponse?,
         baseCurrencyDto: BaseCurrencyDto?
@@ -75,7 +83,7 @@ class DataProducerHandler {
     fun calculateBaseCurrency(rateDto: RateDto?, newValue: Double?): BaseCurrencyDto {
         return BaseCurrencyDto(
             currencySymbol = rateDto?.symbol,
-            euroValue = newValue?.div(rateDto?.value ?: 1.0)
+            euroValue = newValue?.div(rateDto?.value ?: 1.0) ?: 1.0
         )
     }
 
@@ -85,7 +93,7 @@ class DataProducerHandler {
         var newValue = (baseCurrency?.euroValue?.times(ratesRemoteResponse?.rates?.dkk ?: 1.0))?.div(simpleValue ?: 1.0)
         val currentValue = baseCurrency?.euroValue?.times(newValue ?: 1.0)
         return baseCurrency.also {
-           it?. euroValue = currentValue
+           it?. euroValue = currentValue ?: 1.0
         }
     }
 }

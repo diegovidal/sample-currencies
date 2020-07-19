@@ -12,7 +12,7 @@ import com.dvidal.samplecurrencies.core.common.MyConstants
 data class BaseCurrencyDto(
     @PrimaryKey val id: Int = -1,
     var currencySymbol: String? = MyConstants.EUR,
-    var euroValue: Double? = 1.0
+    var euroValue: Double = 1.0
 ) {
 
     companion object {

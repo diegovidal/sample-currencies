@@ -22,7 +22,6 @@ class RatesRepositoryImpl(
     private val dataProducerHandler: DataProducerHandler
 ) : RatesRepository {
 
-    private var listRates: List<RateDto?> = emptyList()
     override suspend fun refreshRates(): EitherResult<Unit> {
 
         return catching {
@@ -32,9 +31,9 @@ class RatesRepositoryImpl(
 
             if (localBaseCurrencyResult.rightOrNull() == null) {
                 baseCurrencyLocalDataSource.insertBaseCurrency(BaseCurrencyDto.firstTime())
-            } else if (listRates.isNotEmpty()) {
+            } else if (dataProducerHandler.fetchListRates().isNotEmpty()) {
 
-                val newBaseCurrency = dataProducerHandler.calculateNewEuroValue(listRates, localBaseCurrencyResult.rightOrNull(),
+                val newBaseCurrency = dataProducerHandler.calculateNewEuroValue(dataProducerHandler.fetchListRates(), localBaseCurrencyResult.rightOrNull(),
                     remoteRatesResult.rightOrNull())
                 baseCurrencyLocalDataSource.insertBaseCurrency(newBaseCurrency)
             }
@@ -51,7 +50,7 @@ class RatesRepositoryImpl(
                     baseCurrencyResponse
                 )
 
-                listRates = insertDtos
+                dataProducerHandler.updateListRates(insertDtos)
                 ratesLocalDataSource.insertAllRates(insertDtos)
             }
         }
@@ -61,15 +60,15 @@ class RatesRepositoryImpl(
 
         return catching {
 
-            val rateDto = listRates.first { ratePresentation.symbol == it?.symbol }
+            val rateDto = dataProducerHandler.fetchListRates().first { ratePresentation.symbol == it?.symbol }
             val baseCurrency = dataProducerHandler.calculateBaseCurrency(rateDto, ratePresentation.value)
 
-            val insertDtos = dataProducerHandler.calculateNewValues(listRates, baseCurrency)
+            val insertDtos = dataProducerHandler.calculateNewValues(dataProducerHandler.fetchListRates(), baseCurrency)
 
             val euro = insertDtos?.first { it?.symbol == MyConstants.EUR }?.value
-            baseCurrencyLocalDataSource.insertBaseCurrency(BaseCurrencyDto(currencySymbol = ratePresentation.symbol, euroValue = euro))
+            baseCurrencyLocalDataSource.insertBaseCurrency(BaseCurrencyDto(currencySymbol = ratePresentation.symbol, euroValue = euro ?: 1.0))
 
-            insertDtos?.let { listRates = it }
+            insertDtos?.let { dataProducerHandler.updateListRates(it) }
             return ratesLocalDataSource.insertAllRates(insertDtos)
         }
     }
