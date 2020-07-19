@@ -12,18 +12,21 @@ import com.dvidal.samplecurrencies.features.currencies.presentation.adapter.Rate
 import com.dvidal.samplecurrencies.features.currencies.presentation.adapter.RatesAdapter
 import kotlinx.android.synthetic.main.fragment_rates.*
 import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 
 /**
  * @author diegovidal on 17/07/20.
  */
-class RatesFragment: BaseFragment(), RateViewHolderListener {
+class RatesFragment : BaseFragment(), RateViewHolderListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     @Inject
     lateinit var ratesAdapter: RatesAdapter
+
+    private var timer: Timer? = null
 
     private val viewModel: RatesViewContract.ViewModel by lazy {
         ViewModelProvider(this, viewModelFactory).get(RatesViewModel::class.java)
@@ -39,8 +42,16 @@ class RatesFragment: BaseFragment(), RateViewHolderListener {
         viewModel.states.observe(viewLifecycleOwner, Observer(::renderStates))
         viewModel.events.observe(viewLifecycleOwner, Observer(::renderEvents))
         viewModel.invokeAction(RatesViewContract.Action.InitPageAction)
+    }
 
-        fab_test?.setOnClickListener { viewModel.invokeAction(RatesViewContract.Action.InitPageAction) }
+    override fun onResume() {
+        super.onResume()
+        startTimer()
+    }
+
+    override fun onPause() {
+        timer?.cancel()
+        super.onPause()
     }
 
     private fun renderStates(state: RatesViewContract.ViewState.State) {
@@ -52,7 +63,7 @@ class RatesFragment: BaseFragment(), RateViewHolderListener {
             RatesViewContract.ViewState.State.RatesLoadingState -> {
                 Timber.d("RatesLoadingState")
             }
-        }.also { renderContentVisibility(state)  }
+        }.also { renderContentVisibility(state) }
 
     }
 
@@ -60,17 +71,30 @@ class RatesFragment: BaseFragment(), RateViewHolderListener {
 
     private fun renderContentVisibility(state: RatesViewContract.ViewState.State) {
 
-        rv_rates.visibility = if (state is RatesViewContract.ViewState.State.RatesSuccessState) View.VISIBLE else View.GONE
-        pb_rates.visibility = if (state is RatesViewContract.ViewState.State.RatesLoadingState) View.VISIBLE else View.GONE
+        rv_rates.visibility =
+            if (state is RatesViewContract.ViewState.State.RatesSuccessState) View.VISIBLE else View.GONE
+        pb_rates.visibility =
+            if (state is RatesViewContract.ViewState.State.RatesLoadingState) View.VISIBLE else View.GONE
     }
 
     private fun configureRecyclerView() {
 
         ratesAdapter.configureListener(this)
-        rv_rates.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        rv_rates.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         rv_rates?.setHasFixedSize(true)
         rv_rates.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         rv_rates.adapter = ratesAdapter
+    }
+
+    private fun startTimer() {
+
+        timer = Timer()
+        timer?.schedule(object : TimerTask() {
+            override fun run() {
+                viewModel.invokeAction(RatesViewContract.Action.RefreshRates)
+            }
+        }, 1000, 1000)
     }
 
     override fun onChangeRateValue(rate: RatePresentation?) {

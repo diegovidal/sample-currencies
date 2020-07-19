@@ -61,9 +61,9 @@ class RatesViewModel @Inject constructor(
         viewModelScope.launch(dispatcher.IO()) {
             when (action) {
                 is RatesViewContract.Action.InitPageAction -> {
-
                     fetchRates()
-                    // TODO: PUT THIS ON WORKMANAGER
+                }
+                RatesViewContract.Action.RefreshRates -> {
                     refreshRatesUseCase.invoke(UseCase.None()).also {
                         it.either(::handleFailure) {}
                     }

@@ -18,6 +18,7 @@ sealed class RatesViewContract {
     sealed class Action: RatesViewContract() {
 
         object InitPageAction : Action()
+        object RefreshRates : Action()
         data class ChangeRateAction(val rate: RatePresentation) : Action()
     }
 
