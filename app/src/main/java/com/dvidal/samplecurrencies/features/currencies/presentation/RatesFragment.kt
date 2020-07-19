@@ -4,8 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dvidal.samplecurrencies.R
 import com.dvidal.samplecurrencies.core.common.BaseFragment
+import com.dvidal.samplecurrencies.features.currencies.presentation.adapter.RateViewHolderListener
+import com.dvidal.samplecurrencies.features.currencies.presentation.adapter.RatesAdapter
 import kotlinx.android.synthetic.main.fragment_rates.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -13,12 +17,15 @@ import javax.inject.Inject
 /**
  * @author diegovidal on 17/07/20.
  */
-class RatesFragment: BaseFragment() {
+class RatesFragment: BaseFragment(), RateViewHolderListener {
 
     private var list = listOf<RatePresentation?>()
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var ratesAdapter: RatesAdapter
 
     private val viewModel: RatesViewContract.ViewModel by lazy {
         ViewModelProvider(this, viewModelFactory).get(RatesViewModel::class.java)
@@ -29,34 +36,37 @@ class RatesFragment: BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        configureRecyclerView()
 
         viewModel.states.observe(viewLifecycleOwner, Observer(::renderStates))
         viewModel.events.observe(viewLifecycleOwner, Observer(::renderEvents))
         viewModel.invokeAction(RatesViewContract.Action.InitPageAction)
-
-        my_button.setOnClickListener(::eventClick)
     }
 
     private fun renderStates(state: RatesViewContract.ViewState.State) {
 
         when (state) {
             is RatesViewContract.ViewState.State.RatesSuccessState -> {
-                Timber.d("RatesSuccessState Aqui! -- ${state.response.rates}")
-                list = state.response.rates
+                ratesAdapter.updateDataSet(state.response.rates)
             }
             RatesViewContract.ViewState.State.RatesLoadingState -> Timber.d("RatesLoadingState Aqui!")
         }
     }
 
-    private fun eventClick(view: View) {
+    private fun renderEvents(state: RatesViewContract.ViewState.Event) {}
 
-        list[3]?.let { rate ->
-            rate.value = 1.0
-            viewModel.invokeAction(RatesViewContract.Action.ChangeRateAction(rate))
-        }
+    private fun configureRecyclerView() {
+
+        ratesAdapter.configureListener(this)
+        rv_rates.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        rv_rates?.setHasFixedSize(true)
+        rv_rates.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        rv_rates.adapter = ratesAdapter
     }
 
-    private fun renderEvents(state: RatesViewContract.ViewState.Event) {}
+    override fun onChangeRateValue(rate: RatePresentation?) {
+        rate?.let { viewModel.invokeAction(RatesViewContract.Action.ChangeRateAction(it)) }
+    }
 
     companion object {
 

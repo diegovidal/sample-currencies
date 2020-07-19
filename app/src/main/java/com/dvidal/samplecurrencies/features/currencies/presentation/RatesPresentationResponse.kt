@@ -12,7 +12,7 @@ data class RatesPresentationResponse(
 data class RatePresentation(
     val symbol: String,
     val name: Int? = null,
-    var value: Double? = null,
+    var value: Double = 0.0,
     val image: Int? = null,
     val isDefault: Boolean = false
 ) {

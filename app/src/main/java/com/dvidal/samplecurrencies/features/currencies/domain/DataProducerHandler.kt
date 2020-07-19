@@ -20,7 +20,7 @@ class DataProducerHandler {
             RateDto(
                 symbol = MyConstants.USD,
                 name = R.string.symbol_usd,
-                value = baseCurrencyDto?.euroValue?.times(ratesRemoteResponse?.rates?.usd ?: 1.0),
+                value = baseCurrencyDto?.euroValue?.times(ratesRemoteResponse?.rates?.usd ?: 0.0) ?: 0.0,
                 image = R.drawable.ic_usd,
                 isDefault = MyConstants.USD == baseCurrencyDto?.currencySymbol
             )
@@ -29,7 +29,7 @@ class DataProducerHandler {
             RateDto(
                 symbol = MyConstants.BRL,
                 name = R.string.symbol_brl,
-                value = baseCurrencyDto?.euroValue?.times(ratesRemoteResponse?.rates?.brl ?: 1.0),
+                value = baseCurrencyDto?.euroValue?.times(ratesRemoteResponse?.rates?.brl ?: 0.0) ?: 0.0,
                 image = R.drawable.ic_brl,
                 isDefault = MyConstants.BRL == baseCurrencyDto?.currencySymbol
             )
@@ -38,7 +38,7 @@ class DataProducerHandler {
             RateDto(
                 symbol = MyConstants.EUR,
                 name = R.string.symbol_eur,
-                value = baseCurrencyDto?.euroValue,
+                value = baseCurrencyDto?.euroValue ?: 0.0,
                 image = R.drawable.ic_eur,
                 isDefault = MyConstants.EUR == baseCurrencyDto?.currencySymbol
             )
@@ -47,7 +47,7 @@ class DataProducerHandler {
             RateDto(
                 symbol = MyConstants.JPY,
                 name = R.string.symbol_jpy,
-                value = baseCurrencyDto?.euroValue?.times(ratesRemoteResponse?.rates?.jpy ?: 1.0),
+                value = baseCurrencyDto?.euroValue?.times(ratesRemoteResponse?.rates?.jpy ?: 0.0) ?: 0.0,
                 image = R.drawable.ic_jpy,
                 isDefault = MyConstants.JPY == baseCurrencyDto?.currencySymbol
             )
@@ -56,7 +56,7 @@ class DataProducerHandler {
             RateDto(
                 symbol = MyConstants.DKK,
                 name = R.string.symbol_dkk,
-                value = baseCurrencyDto?.euroValue?.times(ratesRemoteResponse?.rates?.dkk ?: 1.0),
+                value = baseCurrencyDto?.euroValue?.times(ratesRemoteResponse?.rates?.dkk ?: 0.0) ?: 0.0,
                 image = R.drawable.ic_dkk,
                 isDefault = MyConstants.DKK == baseCurrencyDto?.currencySymbol
             )
@@ -66,7 +66,7 @@ class DataProducerHandler {
 
     fun calculateNewValues(ratesDto: List<RateDto?>?, baseCurrency: BaseCurrencyDto?): List<RateDto?>? {
         ratesDto?.forEach {
-            it?.value = baseCurrency?.euroValue?.times(it?.value ?: 1.0)
+            it?.value = baseCurrency?.euroValue?.times(it?.value ?: 0.0) ?: 0.0
             it?.isDefault = it?.symbol == baseCurrency?.currencySymbol
         }
         return ratesDto

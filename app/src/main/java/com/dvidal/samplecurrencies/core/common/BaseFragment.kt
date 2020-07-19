@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.dvidal.samplecurrencies.BaseApplication
 
 /**
- * @author diegovidal on 2020-02-16.
+ * @author diegovidal on 2020-07-18.
  */
 abstract class BaseFragment: Fragment() {
 

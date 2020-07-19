@@ -11,7 +11,7 @@ import com.dvidal.samplecurrencies.features.currencies.presentation.RatePresenta
 data class RateDto(
     @PrimaryKey var symbol: String = "",
     val name: Int = -1,
-    var value: Double? = -1.0,
+    var value: Double = 0.0,
     val image: Int = -1,
     var isDefault: Boolean = false
 ) {
