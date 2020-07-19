@@ -1,8 +1,5 @@
 package com.dvidal.samplecurrencies.features.currencies.domain
 
-import android.content.Context
-import android.view.View
-import android.view.inputmethod.InputMethodManager
 import com.dvidal.samplecurrencies.core.common.EitherResult
 import com.dvidal.samplecurrencies.core.common.catching
 import com.dvidal.samplecurrencies.features.currencies.data.local.basecurrency.BaseCurrencyDto
@@ -22,6 +19,8 @@ class RatesRepositoryImpl(
     private val ratesRemoteDataSource: RatesRemoteDataSource,
     private val dataProducerHandler: DataProducerHandler
 ) : RatesRepository {
+
+    private var listRates: List<RateDto?> = emptyList()
 
     override suspend fun refreshRates(): EitherResult<Unit> {
 
@@ -44,6 +43,8 @@ class RatesRepositoryImpl(
                     ratesRemoteResponse,
                     baseCurrencyResponse
                 )
+
+                listRates = insertDtos
                 ratesLocalDataSource.insertAllRates(insertDtos)
             }
         }
@@ -53,8 +54,7 @@ class RatesRepositoryImpl(
 
         return catching {
 
-            val localRatesResult = ratesLocalDataSource.fetchAllRates().rightOrNull()
-            val rateDto = localRatesResult?.first { ratePresentation.symbol == it?.symbol }
+            val rateDto = listRates.first { ratePresentation.symbol == it?.symbol }
 
             val baseCurrency = dataProducerHandler.calculateBaseCurrency(rateDto, ratePresentation.value)
             baseCurrencyLocalDataSource.insertBaseCurrency(baseCurrency)
@@ -62,10 +62,11 @@ class RatesRepositoryImpl(
             val localBaseCurrencyResult = baseCurrencyLocalDataSource.fetchBaseCurrency().rightOrNull()
 
             val insertDtos = dataProducerHandler.calculateNewValues(
-                localRatesResult,
+                listRates,
                 localBaseCurrencyResult
             )
 
+            insertDtos?.let { listRates = it }
             return ratesLocalDataSource.insertAllRates(insertDtos)
         }
     }

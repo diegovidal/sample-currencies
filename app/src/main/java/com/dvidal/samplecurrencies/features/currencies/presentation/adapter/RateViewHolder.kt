@@ -46,7 +46,8 @@ class RateViewHolder(
             view.et_rate_value?.isEnabled = false
         }
 
-        view.setOnClickListener {
+        view.view_overlay_content?.visibility = if (rate?.isDefault == false) View.VISIBLE else View.GONE
+        view.view_overlay_content?.setOnClickListener {
 
             if (rate?.isDefault == false) {
                 view.et_rate_value?.hideKeyboard()

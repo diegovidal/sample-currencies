@@ -19,8 +19,6 @@ import javax.inject.Inject
  */
 class RatesFragment: BaseFragment(), RateViewHolderListener {
 
-    private var list = listOf<RatePresentation?>()
-
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -49,11 +47,20 @@ class RatesFragment: BaseFragment(), RateViewHolderListener {
             is RatesViewContract.ViewState.State.RatesSuccessState -> {
                 ratesAdapter.updateDataSet(state.response.rates)
             }
-            RatesViewContract.ViewState.State.RatesLoadingState -> Timber.d("RatesLoadingState Aqui!")
-        }
+            RatesViewContract.ViewState.State.RatesLoadingState -> {
+                Timber.d("RatesLoadingState")
+            }
+        }.also { renderContentVisibility(state)  }
+
     }
 
     private fun renderEvents(state: RatesViewContract.ViewState.Event) {}
+
+    private fun renderContentVisibility(state: RatesViewContract.ViewState.State) {
+
+        rv_rates.visibility = if (state is RatesViewContract.ViewState.State.RatesSuccessState) View.VISIBLE else View.GONE
+        pb_rates.visibility = if (state is RatesViewContract.ViewState.State.RatesLoadingState) View.VISIBLE else View.GONE
+    }
 
     private fun configureRecyclerView() {
 
