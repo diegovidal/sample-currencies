@@ -18,6 +18,7 @@ data class RateDto(
 
     fun mapperToRatePresentation() = RatePresentation(
         symbol = this.symbol,
+        name = this.name,
         value = this.value,
         image = this.image,
         isDefault = this.isDefault

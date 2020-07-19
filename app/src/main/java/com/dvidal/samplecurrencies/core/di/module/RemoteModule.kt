@@ -8,6 +8,7 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.Call
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
@@ -19,11 +20,19 @@ import javax.inject.Singleton
 @Module
 class RemoteModule {
 
+    @Provides
+    @Singleton
+    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply {
+            setLevel(HttpLoggingInterceptor.Level.BODY)
+        }
+    }
 
     @Provides
     @Singleton
-    fun provideOkHttp(): Call.Factory {
+    fun provideOkHttp(loggingInterceptor: HttpLoggingInterceptor): Call.Factory {
         return OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
             .readTimeout(10L, TimeUnit.SECONDS)
             .build()
     }

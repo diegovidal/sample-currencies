@@ -25,10 +25,12 @@ class RatesRepositoryImpl(
         return catching {
 
             val remoteRatesResult = ratesRemoteDataSource.fetchRates()
-            val localBaseCurrencyResult = baseCurrencyLocalDataSource.fetchBaseCurrency()
+            var localBaseCurrencyResult = baseCurrencyLocalDataSource.fetchBaseCurrency()
 
-            if (localBaseCurrencyResult.rightOrNull() == null)
+            if (localBaseCurrencyResult.rightOrNull() == null) {
                 baseCurrencyLocalDataSource.insertBaseCurrency(BaseCurrencyDto.firstTime())
+                localBaseCurrencyResult = baseCurrencyLocalDataSource.fetchBaseCurrency()
+            }
 
             if (remoteRatesResult.isRight) {
 

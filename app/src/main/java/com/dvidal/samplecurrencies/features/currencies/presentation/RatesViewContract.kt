@@ -25,7 +25,7 @@ sealed class RatesViewContract {
 
         sealed class State: ViewState() {
 
-            data class RatesSuccessState(val ratesPresentationResponse: RatesPresentationResponse): State()
+            data class RatesSuccessState(val response: RatesPresentationResponse): State()
             object RatesLoadingState: State()
         }
 

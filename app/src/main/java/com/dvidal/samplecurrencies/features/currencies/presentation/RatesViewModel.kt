@@ -9,6 +9,7 @@ import com.dvidal.samplecurrencies.core.common.UseCase
 import com.dvidal.samplecurrencies.features.currencies.data.local.rates.RateDto
 import com.dvidal.samplecurrencies.features.currencies.domain.usecases.ChangeRateUseCase
 import com.dvidal.samplecurrencies.features.currencies.domain.usecases.FetchRatesUseCase
+import com.dvidal.samplecurrencies.features.currencies.domain.usecases.RefreshRatesUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,7 +22,7 @@ class RatesViewModel @Inject constructor(
     private val ratesMapper: RatesMapper,
     private val fetchRatesUseCase: FetchRatesUseCase,
     private val changeRateUseCase: ChangeRateUseCase,
-    private val refreshRatesUseCase: FetchRatesUseCase
+    private val refreshRatesUseCase: RefreshRatesUseCase
 ): BaseViewModel(), RatesViewContract.ViewModel {
 
     private val action = SingleLiveEvent<RatesViewContract.Action>()

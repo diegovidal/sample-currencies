@@ -21,7 +21,8 @@ ext {
     archCore_version = "2.1.0"
 
     // Third Party Libraries
-    retrofit_version = "2.7.0"
+    retrofit_version = "2.9.0"
+    logging_interceptor_version = "4.8.0"
     moshi_version = "1.9.2"
     glide_version = "4.10.0"
     timber_version = "4.7.1"
@@ -58,6 +59,7 @@ ext {
             roomCompiler:               "androidx.room:room-compiler:$room_version",
 
             retrofit:                   "com.squareup.retrofit2:retrofit:$retrofit_version",
+            loggingInterceptor:         "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version",
             moshi:                      "com.squareup.moshi:moshi-kotlin:$moshi_version",
             moshiConverter:             "com.squareup.retrofit2:converter-moshi:$retrofit_version",
             glide:                      "com.github.bumptech.glide:glide:$glide_version",

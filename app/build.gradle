@@ -65,6 +65,7 @@ dependencies {
 
     // Third Party Libraries
     implementation applicationDependencies.retrofit
+    implementation applicationDependencies.loggingInterceptor
     implementation applicationDependencies.moshi
     implementation applicationDependencies.moshiConverter
     implementation applicationDependencies.glide

@@ -6,6 +6,7 @@ import com.dvidal.samplecurrencies.core.common.*
 import com.dvidal.samplecurrencies.features.currencies.data.local.rates.RateDto
 import com.dvidal.samplecurrencies.features.currencies.domain.usecases.ChangeRateUseCase
 import com.dvidal.samplecurrencies.features.currencies.domain.usecases.FetchRatesUseCase
+import com.dvidal.samplecurrencies.features.currencies.domain.usecases.RefreshRatesUseCase
 import com.dvidal.samplecurrencies.utils.MainCoroutineRule
 import com.dvidal.samplecurrencies.utils.getOrAwaitValue
 import io.mockk.coEvery
@@ -40,7 +41,7 @@ class RatesViewModelTest {
     private val ratesMapper = mockk<RatesMapper>(relaxUnitFun = true)
     private val fetchRatesUseCase = mockk<FetchRatesUseCase>(relaxUnitFun = true)
     private val changeRateUseCase = mockk<ChangeRateUseCase>(relaxUnitFun = true)
-    private val refreshRatesUseCase = mockk<FetchRatesUseCase>(relaxUnitFun = true)
+    private val refreshRatesUseCase = mockk<RefreshRatesUseCase>(relaxUnitFun = true)
 
     private lateinit var viewModel: RatesViewModel
 
