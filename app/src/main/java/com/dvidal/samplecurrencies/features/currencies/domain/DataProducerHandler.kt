@@ -21,7 +21,7 @@ class DataProducerHandler {
                 symbol = MyConstants.USD,
                 name = R.string.symbol_usd,
                 value = baseCurrencyDto?.euroValue?.times(ratesRemoteResponse?.rates?.usd ?: 1.0),
-                image = R.drawable.ic_launcher_background,
+                image = R.drawable.ic_usd,
                 isDefault = MyConstants.USD == baseCurrencyDto?.currencySymbol
             )
 
@@ -30,7 +30,7 @@ class DataProducerHandler {
                 symbol = MyConstants.BRL,
                 name = R.string.symbol_brl,
                 value = baseCurrencyDto?.euroValue?.times(ratesRemoteResponse?.rates?.brl ?: 1.0),
-                image = R.drawable.ic_launcher_background,
+                image = R.drawable.ic_brl,
                 isDefault = MyConstants.BRL == baseCurrencyDto?.currencySymbol
             )
 
@@ -39,7 +39,7 @@ class DataProducerHandler {
                 symbol = MyConstants.EUR,
                 name = R.string.symbol_eur,
                 value = baseCurrencyDto?.euroValue,
-                image = R.drawable.ic_launcher_background,
+                image = R.drawable.ic_eur,
                 isDefault = MyConstants.EUR == baseCurrencyDto?.currencySymbol
             )
 
@@ -48,7 +48,7 @@ class DataProducerHandler {
                 symbol = MyConstants.JPY,
                 name = R.string.symbol_jpy,
                 value = baseCurrencyDto?.euroValue?.times(ratesRemoteResponse?.rates?.jpy ?: 1.0),
-                image = R.drawable.ic_launcher_background,
+                image = R.drawable.ic_jpy,
                 isDefault = MyConstants.JPY == baseCurrencyDto?.currencySymbol
             )
 
@@ -57,7 +57,7 @@ class DataProducerHandler {
                 symbol = MyConstants.DKK,
                 name = R.string.symbol_dkk,
                 value = baseCurrencyDto?.euroValue?.times(ratesRemoteResponse?.rates?.dkk ?: 1.0),
-                image = R.drawable.ic_launcher_background,
+                image = R.drawable.ic_dkk,
                 isDefault = MyConstants.DKK == baseCurrencyDto?.currencySymbol
             )
 

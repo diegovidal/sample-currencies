@@ -1,5 +1,6 @@
 package com.dvidal.samplecurrencies.features.currencies.presentation
 
+import android.app.Application
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.*
 import com.dvidal.samplecurrencies.core.common.BaseCoroutineDispatcher
@@ -18,12 +19,13 @@ import javax.inject.Inject
  * @author diegovidal on 18/07/20.
  */
 class RatesViewModel @Inject constructor(
+    application: Application,
     private val dispatcher: BaseCoroutineDispatcher,
     private val ratesMapper: RatesMapper,
     private val fetchRatesUseCase: FetchRatesUseCase,
     private val changeRateUseCase: ChangeRateUseCase,
     private val refreshRatesUseCase: RefreshRatesUseCase
-): BaseViewModel(), RatesViewContract.ViewModel {
+): BaseViewModel(application), RatesViewContract.ViewModel {
 
     private val action = SingleLiveEvent<RatesViewContract.Action>()
 
