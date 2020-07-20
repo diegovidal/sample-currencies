@@ -7,9 +7,6 @@ This application works without internet, providing the correct values.
 # Project structure
 Explore the project master branch and packages to see how it works. The project architecture is MVVM/MVI with Clean Architecture using SOLID concepts.
 
-# UI
-![Screenshot](sample-currencies-ui.png)
-
 ### Overview
 The `app` module is the main entry.
 
@@ -18,6 +15,9 @@ Unit and Automated tests are implemented.
 
 # Sketch Planning
 ![Screenshot](sample-currencies-planning.jpeg)
+
+# UI
+![Screenshot](sample-currencies-ui.png)
 
 ### Features organization
 
