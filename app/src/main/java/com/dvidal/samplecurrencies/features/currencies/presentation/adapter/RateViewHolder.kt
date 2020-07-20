@@ -51,9 +51,13 @@ class RateViewHolder(
         view.view_overlay_content?.setOnClickListener {
 
             if (rate?.isDefault == false) {
-                view.et_rate_value?.hideKeyboard()
                 listener?.onChangeRateValue(rate)
             }
+        }
+        view.et_rate_value.setOnEditorActionListener { _, _, _ ->
+
+            view.et_rate_value?.hideKeyboard()
+            return@setOnEditorActionListener true
         }
     }
 
