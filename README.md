@@ -23,7 +23,7 @@ Unit and Automated tests are implemented.
 
 I have organized my code by feature. This avoid to share knowledge between feature without is required.
 
-- **Reviews Screen**
+- **Currencies Screen**
   * Show Currencies
   * Refresh currencies every 1 second
   * When tap  currency should slide to the top
