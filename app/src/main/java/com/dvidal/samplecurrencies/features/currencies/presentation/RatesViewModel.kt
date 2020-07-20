@@ -1,6 +1,5 @@
 package com.dvidal.samplecurrencies.features.currencies.presentation
 
-import android.app.Application
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.*
 import com.dvidal.samplecurrencies.core.common.BaseCoroutineDispatcher
@@ -63,7 +62,7 @@ class RatesViewModel @Inject constructor(
                 is RatesViewContract.Action.InitPageAction -> {
                     fetchRates()
                 }
-                RatesViewContract.Action.RefreshRates -> {
+                RatesViewContract.Action.RefreshRatesAction -> {
                     refreshRatesUseCase.invoke(UseCase.None()).also {
                         it.either(::handleFailure) {}
                     }

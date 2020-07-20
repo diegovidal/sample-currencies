@@ -12,7 +12,6 @@ import com.dvidal.samplecurrencies.features.currencies.presentation.adapter.Rate
 import com.dvidal.samplecurrencies.features.currencies.presentation.adapter.RatesAdapter
 import kotlinx.android.synthetic.main.fragment_rates.*
 import timber.log.Timber
-import java.util.*
 import javax.inject.Inject
 
 /**
@@ -26,7 +25,8 @@ class RatesFragment : BaseFragment(), RateViewHolderListener {
     @Inject
     lateinit var ratesAdapter: RatesAdapter
 
-    private var timer: Timer? = null
+    @Inject
+    lateinit var timerHandler: MyTimerHandler
 
     private val viewModel: RatesViewContract.ViewModel by lazy {
         ViewModelProvider(this, viewModelFactory).get(RatesViewModel::class.java)
@@ -46,11 +46,11 @@ class RatesFragment : BaseFragment(), RateViewHolderListener {
 
     override fun onResume() {
         super.onResume()
-        startTimer()
+        timerHandler.startTimer { viewModel.invokeAction(RatesViewContract.Action.RefreshRatesAction) }
     }
 
     override fun onPause() {
-        timer?.cancel()
+        timerHandler.cancelTimer()
         super.onPause()
     }
 
@@ -87,15 +87,7 @@ class RatesFragment : BaseFragment(), RateViewHolderListener {
         rv_rates.adapter = ratesAdapter
     }
 
-    private fun startTimer() {
 
-        timer = Timer()
-        timer?.schedule(object : TimerTask() {
-            override fun run() {
-                viewModel.invokeAction(RatesViewContract.Action.RefreshRates)
-            }
-        }, 1000, 1000)
-    }
 
     override fun onChangeRateValue(rate: RatePresentation?) {
         rate?.let { viewModel.invokeAction(RatesViewContract.Action.ChangeRateAction(it)) }

@@ -1,7 +1,6 @@
 package com.dvidal.samplecurrencies.features
 
 import android.content.Intent
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
@@ -23,7 +22,6 @@ import com.dvidal.samplecurrencies.utils.RecyclerViewMatcher
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import kotlinx.android.synthetic.main.fragment_rates.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -60,6 +58,13 @@ class RatesFragmentTest : BaseEspressoTest() {
 
         activityRule.launchActivity(Intent())
         verify(exactly = 1) { ratesViewModel.invokeAction(RatesViewContract.Action.InitPageAction) }
+    }
+
+    @Test
+    fun whenShowRatesFragment_shouldCallRefreshRatesAction() {
+
+        activityRule.launchActivity(Intent())
+        verify(exactly = 1) { ratesViewModel.invokeAction(RatesViewContract.Action.RefreshRatesAction) }
     }
 
     @Test
